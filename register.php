@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Classimax</title>
-  
+
   <!-- FAVICON -->
   <link href="img/favicon.png" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
@@ -119,16 +120,17 @@
                 <div class="col-lg-5 col-md-8 align-item-center">
                     <div class="border border">
                         <h3 class="bg-gray p-4">Register Now</h3>
-                        <form action="#">
+                        <form method="post" action="register.php">
                             <fieldset class="p-4">
-                                <input type="email" placeholder="Email*" class="border p-3 w-100 my-2">
-                                <input type="password" placeholder="Password*" class="border p-3 w-100 my-2">
-                                <input type="password" placeholder="Confirm Password*" class="border p-3 w-100 my-2">
+                              <input type="text" placeholder="Username*" name="username" value="<?php echo $username; ?>" class="border p-3 w-100 my-2">
+                                <input type="email" placeholder="Email*" name="email" value="<?php echo $email; ?>" class="border p-3 w-100 my-2">
+                                <input type="password" placeholder="Password*" name="password_1" class="border p-3 w-100 my-2">
+                                <input type="password" placeholder="Confirm Password*" name="password_2" class="border p-3 w-100 my-2">
                                 <div class="loggedin-forgot d-inline-flex my-3">
                                         <input type="checkbox" id="registering" class="mt-1">
                                         <label for="registering" class="px-2">By registering, you accept our <a class="text-primary font-weight-bold" href="terms-condition.html">Terms & Conditions</a></label>
                                 </div>
-                                <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold">Register Now</button>
+                                <button type="submit"  name="reg_user" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold">Register Now</button>
                             </fieldset>
                         </form>
                     </div>

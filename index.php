@@ -1,3 +1,6 @@
+<?php
+    session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +9,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Classimax</title>
-  
+  <title>I Borrow It</title>
+
   <!-- FAVICON -->
   <link href="img/favicon.png" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
@@ -45,7 +48,7 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light navigation">
 					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.png" alt="">
+						<img src="images/logo_home.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,12 +102,18 @@
 							</li>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="login.html">Login</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-white add-button" href="ad-listing.html"><i class="fa fa-plus-circle"></i> Add Listing</a>
-							</li>
+              <?php  if (isset($_SESSION['username'])) : ?>
+                    <li class="nav-item">
+    								          <a class="nav-link login-button" href="personalpage.php"><?php echo ucfirst($_SESSION['username']); ?></a>
+    							  </li>
+                    <li class="nav-item">
+    								          <a class="nav-link login-button" href="logout.php">Logout</a>
+    							  </li>
+              <?php else : ?>
+                <li class="nav-item">
+								          <a class="nav-link login-button" href="login.php">Login</a>
+							  </li>
+              <?php endif ?>
 						</ul>
 					</div>
 				</nav>
@@ -145,7 +154,7 @@
 							</li>
 						</ul>
 					</div>
-					
+
 				</div>
 				<!-- Advance Search -->
 				<div class="advance-search">
@@ -177,7 +186,7 @@
 								</div>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
@@ -357,8 +366,8 @@
 					</div>
 				</div>
 			</div>
-			
-			
+
+
 		</div>
 	</div>
 </section>
@@ -384,7 +393,7 @@
 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 						<div class="category-block">
 							<div class="header">
-								<i class="fa fa-laptop icon-bg-1"></i> 
+								<i class="fa fa-laptop icon-bg-1"></i>
 								<h4>Electronics</h4>
 							</div>
 							<ul class="category-list" >
@@ -399,7 +408,7 @@
 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 						<div class="category-block">
 							<div class="header">
-								<i class="fa fa-apple icon-bg-2"></i> 
+								<i class="fa fa-apple icon-bg-2"></i>
 								<h4>Restaurants</h4>
 							</div>
 							<ul class="category-list" >
@@ -414,7 +423,7 @@
 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 						<div class="category-block">
 							<div class="header">
-								<i class="fa fa-home icon-bg-3"></i> 
+								<i class="fa fa-home icon-bg-3"></i>
 								<h4>Real Estate</h4>
 							</div>
 							<ul class="category-list" >
@@ -429,7 +438,7 @@
 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 						<div class="category-block">
 							<div class="header">
-								<i class="fa fa-shopping-basket icon-bg-4"></i> 
+								<i class="fa fa-shopping-basket icon-bg-4"></i>
 								<h4>Shoppings</h4>
 							</div>
 							<ul class="category-list" >
@@ -444,7 +453,7 @@
 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 						<div class="category-block">
 							<div class="header">
-								<i class="fa fa-briefcase icon-bg-5"></i> 
+								<i class="fa fa-briefcase icon-bg-5"></i>
 								<h4>Jobs</h4>
 							</div>
 							<ul class="category-list" >
@@ -459,7 +468,7 @@
 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 						<div class="category-block">
 							<div class="header">
-								<i class="fa fa-car icon-bg-6"></i> 
+								<i class="fa fa-car icon-bg-6"></i>
 								<h4>Vehicles</h4>
 							</div>
 							<ul class="category-list" >
@@ -474,7 +483,7 @@
 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 						<div class="category-block">
 							<div class="header">
-								<i class="fa fa-paw icon-bg-7"></i> 
+								<i class="fa fa-paw icon-bg-7"></i>
 								<h4>Pets</h4>
 							</div>
 							<ul class="category-list" >
@@ -488,9 +497,9 @@
 					<!-- Category list -->
 					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
 						<div class="category-block">
-							
+
 							<div class="header">
-								<i class="fa fa-laptop icon-bg-8"></i> 
+								<i class="fa fa-laptop icon-bg-8"></i>
 								<h4>Services</h4>
 							</div>
 							<ul class="category-list" >
@@ -501,8 +510,8 @@
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
-					
-					
+
+
 				</div>
 			</div>
 		</div>
@@ -656,6 +665,3 @@
 </body>
 
 </html>
-
-
-
