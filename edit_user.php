@@ -1,9 +1,8 @@
 <?php include('server.php') ?>
 <?php
-          if (isset($_SESSION['username'])) {
-  	          header('location: personalpage.php');
-            }
-  ?>
+  $user = mysqli_real_escape_string($db, $_GET['username']);
+  $row = getUserInfo($user);
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,8 +58,8 @@
   					</button>
   					<div class="collapse navbar-collapse" id="navbarSupportedContent">
   						<ul class="navbar-nav ml-auto main-nav ">
-  							<li class="nav-item active">
-  								<a class="nav-link" href="index.html">Home</a>
+  							<li class="nav-item">
+  								<a class="nav-link" href="index.php">Home</a>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
   								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
@@ -124,30 +123,122 @@
   		</div>
   	</div>
   </section>
+<!--==================================
+=            User Profile            =
+===================================-->
 
-<section class="login py-5 border-top-1">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-8 align-item-center">
-                <div class="border">
-                    <h3 class="bg-gray p-4">Login Now</h3>
-                    <form method="post" action="login.php">
-                        <fieldset class="p-4">
-                            <input type="text" placeholder="Username" name="username" class="border p-3 w-100 my-2">
-                            <input type="password" placeholder="Password" name="password" class="border p-3 w-100 my-2">
-                            <div class="loggedin-forgot">
-                                    <input type="checkbox" id="keep-me-logged-in">
-                                    <label for="keep-me-logged-in" class="pt-3 pb-2">Keep me logged in</label>
-                            </div>
-                            <button type="submit" name="login_user" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-3">Log in</button>
-                            <a class="mt-3 d-block  text-primary" href="#">Forget Password?</a>
-                            <a class="mt-3 d-inline-block text-primary" href="register.php">Register Now</a>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="user-profile section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+				<div class="sidebar">
+					<!-- User Widget -->
+					<div class="widget user">
+						<!-- User Image -->
+						<div class="image d-flex justify-content-center">
+							<img src="images/user/user-thumb.jpg" alt="" class="">
+						</div>
+						<!-- User Name -->
+						<h5 class="text-center">
+              <?php
+              echo ucfirst($row['fname']);
+              echo ' ';
+              echo ucfirst($row['lname'])
+              ?>
+            </h5>
+					</div>
+					<!-- Dashboard Links -->
+					<div class="widget dashboard-links">
+						<ul>
+							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+				<!-- Edit Profile Welcome Text -->
+				<div class="widget welcome-message">
+					<h2>Edit profile</h2>
+					<p>Edit your personal info here</p>
+				</div>
+				<!-- Edit Personal Info -->
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<div class="widget personal-info">
+							<h3 class="widget-header user">Edit Personal Information</h3>
+							<form method="post" action="personalpage.php">
+                <?php echo '<input type="hidden" name="username" value='.$row['username'].'>' ?>
+								<!-- First Name -->
+								<div class="form-group">
+									<label for="first-name">First Name</label>
+                  <input type="text" class="form-control" name="fname"  id="first-name" value="<?php echo ucfirst($row['fname'])?>">
+								</div>
+								<!-- Last Name -->
+								<div class="form-group">
+									<label for="last-name">Last Name</label>
+									<input type="text" class="form-control" name="lname" id="last-name" value="<?php echo ucfirst($row['lname'])?>">
+								</div>
+								<!--
+                File chooser
+								<div class="form-group choose-file d-inline-flex">
+									<i class="fa fa-user text-center px-3"></i>
+									<input type="file" class="form-control-file mt-2 pt-1" id="input-file">
+								 </div>
+                 -->
+								<!-- Comunity Name -->
+								<div class="form-group">
+									<label for="comunity-name">Comunity Name</label>
+									<input type="text" name="username" class="form-control" id="comunity-name" value="<?php echo ucfirst($row['username'])?>">
+								</div>
+								<!-- Submit button -->
+								<button class="btn btn-transparent"  type="submit" name="update_personal">Save My Changes</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<!-- Change Password -->
+					<div class="widget change-password">
+            <?php echo '<input type="hidden" name="username" value='.$row['username'].'>' ?>
+						<h3 class="widget-header user">Edit Password</h3>
+						<form method="post" action="personalpage.php">
+							<!-- New Password -->
+							<div class="form-group">
+								<label for="new-password">New Password</label>
+								<input type="password" name="new_pass1" class="form-control" id="new-password">
+							</div>
+							<!-- Confirm New Password -->
+							<div class="form-group">
+								<label for="confirm-password">Confirm New Password</label>
+								<input type="password" name="new_pass2" class="form-control" id="confirm-password">
+							</div>
+							<!-- Submit Button -->
+							<button class="btn btn-transparent" type="submit" name="admin_update">Change Password</button>
+						</form>
+					</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<!-- Change Email Address -->
+					<div class="widget change-email mb-0">
+						<h3 class="widget-header user">Edit Email Address</h3>
+						<form action="#">
+              <?php echo '<input type="hidden" name="username" value='.$row['username'].'>' ?>
+							<!-- New email -->
+							<div class="form-group">
+								<label for="new-email">New email</label>
+								<input type="email" name='new_email' class="form-control" id="new-email">
+							</div>
+							<!-- Submit Button -->
+							<button class="btn btn-transparent">Change email</button>
+						</form>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!--============================

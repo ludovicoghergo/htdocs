@@ -47,7 +47,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="index.php">
 						<img src="images/logo_home.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -60,8 +60,10 @@
 								<a class="nav-link" href="index.html">Home</a>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
-								</a>
+								<del>
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
+								  </a>
+                </del>
 
 								<!-- Dropdown list -->
 								<div class="dropdown-menu">
@@ -73,9 +75,11 @@
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <del>
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									Pages <span><i class="fa fa-angle-down"></i></span>
 								</a>
+                </del>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="about-us.html">About Us</a>
@@ -91,9 +95,11 @@
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <del>
+                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									Listing <span><i class="fa fa-angle-down"></i></span>
 								</a>
+                </del>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
@@ -555,7 +561,7 @@
         <!-- About -->
         <div class="block about">
           <!-- footer logo -->
-          <img src="images/logo-footer.png" alt="">
+          <img src="images/logo_home.png" alt="">
           <!-- description -->
           <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco

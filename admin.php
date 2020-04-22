@@ -1,10 +1,11 @@
 <?php include('server.php') ?>
 <?php
-   if (isset($_SESSION['username']) ){
-    echo checkAdmin();
+    checkSession();
+    checkAdmin();
     $sql = "SELECT * FROM users";
     $result = mysqli_query($db, $sql);
-   }
+    $user = $_SESSION['username'];
+    $personal = getUserInfo($user);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,79 +47,85 @@
 
 <body class="body-wrapper">
 
-<section>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.png" alt="">
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item active">
-								<a class="nav-link" href="index.html">Home</a>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
-								</a>
+  <section>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-12">
+  				<nav class="navbar navbar-expand-lg navbar-light navigation">
+  					<a class="navbar-brand" href="index.php">
+  						<img src="images/logo_home.png" alt="">
+  					</a>
+  					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  						<span class="navbar-toggler-icon"></span>
+  					</button>
+  					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  						<ul class="navbar-nav ml-auto main-nav ">
+  							<li class="nav-item active">
+  								<a class="nav-link" href="index.html">Home</a>
+  							</li>
+  							<li class="nav-item dropdown dropdown-slide">
+  								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
+  								</a>
 
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
-									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
-									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
-									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
-									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="about-us.html">About Us</a>
-									<a class="dropdown-item" href="contact-us.html">Contact Us</a>
-									<a class="dropdown-item" href="user-profile.html">User Profile</a>
-									<a class="dropdown-item" href="404.html">404 Page</a>
-									<a class="dropdown-item" href="package.html">Package</a>
-									<a class="dropdown-item" href="single.html">Single Page</a>
-									<a class="dropdown-item" href="store.html">Store Single</a>
-									<a class="dropdown-item" href="single-blog.html">Single Post</a>
-									<a class="dropdown-item" href="blog.html">Blog</a>
+  								<!-- Dropdown list -->
+  								<div class="dropdown-menu">
+  									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
+  									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
+  									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
+  									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
+  									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
+  								</div>
+  							</li>
+  							<li class="nav-item dropdown dropdown-slide">
+  								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  									Pages <span><i class="fa fa-angle-down"></i></span>
+  								</a>
+  								<!-- Dropdown list -->
+  								<div class="dropdown-menu">
+  									<a class="dropdown-item" href="about-us.html">About Us</a>
+  									<a class="dropdown-item" href="contact-us.html">Contact Us</a>
+  									<a class="dropdown-item" href="user-profile.html">User Profile</a>
+  									<a class="dropdown-item" href="404.html">404 Page</a>
+  									<a class="dropdown-item" href="package.html">Package</a>
+  									<a class="dropdown-item" href="single.html">Single Page</a>
+  									<a class="dropdown-item" href="store.html">Store Single</a>
+  									<a class="dropdown-item" href="single-blog.html">Single Post</a>
+  									<a class="dropdown-item" href="blog.html">Blog</a>
 
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
-									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
-								</div>
-							</li>
-						</ul>
-						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="login.html">Login</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-white add-button" href="ad-listing.html"><i class="fa fa-plus-circle"></i> Add Listing</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
+  								</div>
+  							</li>
+  							<li class="nav-item dropdown dropdown-slide">
+  								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  									Listing <span><i class="fa fa-angle-down"></i></span>
+  								</a>
+  								<!-- Dropdown list -->
+  								<div class="dropdown-menu">
+  									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
+  									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
+  								</div>
+  							</li>
+  						</ul>
+  						<ul class="navbar-nav ml-auto mt-10">
+                <?php  if (isset($_SESSION['username'])) : ?>
+                      <li class="nav-item">
+      								          <a class="nav-link login-button" href="personalpage.php"><?php echo ucfirst($_SESSION['username']); ?></a>
+      							  </li>
+                      <li class="nav-item">
+      								          <a class="nav-link login-button" href="logout.php">Logout</a>
+      							  </li>
+                <?php else : ?>
+                  <li class="nav-item">
+  								          <a class="nav-link login-button" href="login.php">Login</a>
+  							  </li>
+                <?php endif ?>
+  						</ul>
+  					</div>
+  				</nav>
+  			</div>
+  		</div>
+  	</div>
+  </section>
 <!--==================================
 =            User Profile            =
 ===================================-->
@@ -136,29 +143,28 @@
 							<img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
 						</div>
 						<!-- User Name -->
-						<h5 class="text-center">Samanta Doe</h5>
-						<p>Joined February 06, 2017</p>
-						<a href="user-profile.html" class="btn btn-main-sm">Edit Profile</a>
+            <h5 class="text-center">
+              <?php
+              echo ucfirst($personal['fname']);
+              echo ' ';
+              echo ucfirst($personal['lname'])
+              ?>
+            </h5>
+						<a href="personalpage.php" class="btn btn-main-sm">Edit Profile</a>
 					</div>
 					<!-- Dashboard Links -->
 					<div class="widget user-dashboard-menu">
 						<ul>
 							<li class="active">
-                <a href="dashboard-my-ads.html"><i class="fa fa-user"></i> Users</a></li>
+                <a href="#"><i class="fa fa-user"></i> Users</a></li>
 							<li>
-								<a href="dashboard-favourite-ads.html"><i class="fa fa-bookmark-o"></i> Favourite Ads <span>5</span></a>
+								<a href="#"><i class="fa fa-bookmark-o"></i><del> Sells</del></a>
 							</li>
 							<li>
-								<a href="dashboard-archived-ads.html"><i class="fa fa-file-archive-o"></i>Archeved Ads <span>12</span></a>
+								<a href="#"><i class="fa fa-file-archive-o"></i><del>Buyings</del></a>
 							</li>
 							<li>
-								<a href="dashboard-pending-ads.html"><i class="fa fa-bolt"></i> Pending Approval<span>23</span></a>
-							</li>
-							<li>
-								<a href=""><i class="fa fa-cog"></i> Logout</a>
-							</li>
-							<li>
-								<a href="" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete Account</a>
+								<a href="#"><i class="fa fa-bolt"></i><del>Messages</del></a>
 							</li>
 						</ul>
 					</div>
@@ -196,7 +202,7 @@
 			<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
 				<!-- Recently Favorited -->
 				<div class="widget dashboard-container my-adslist">
-					<h3 class="widget-header">My Ads</h3>
+					<h3 class="widget-header">Users</h3>
 					<table class="table table-responsive product-dashboard-table">
 						<thead>
 							<tr>
@@ -221,7 +227,7 @@
       									<div class="">
       										<ul class="list-inline justify-content-center">
       											<li class="list-inline-item">
-      												<a data-toggle="tooltip" data-placement="top" title="Edit" class="edit" href="server.php" name="delete_user">
+      												<a data-toggle="tooltip" data-placement="top" title="Edit" class="edit" href="edit_user.php?username=<?php echo $row['username']?>">
       													<i class="fa fa-pencil"></i>
       												</a>
       											</li>

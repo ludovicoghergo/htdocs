@@ -86,11 +86,50 @@ if (isset($_POST['login_user'])) {
 if (isset($_GET['del_user'])) {
   $username = mysqli_real_escape_string($db, $_GET['del_user']);
   $query = "DELETE FROM users WHERE username='$username'";
-  var_dump($query);
   if(mysqli_query($db, $query)){
     echo '<div class="alert alert-success"> Account Eliminated </div>';
   }else{
     echo '<div class="alert alert-danger"> Something didnt workout </div>';
+  }
+}
+
+//UPDATE PERSONAL INFO
+if (isset($_POST['update_personal'])) {
+  $sess_user = $_SESSION['username'];
+  $username = mysqli_real_escape_string($db, $_POST['username']);
+  $fname = mysqli_real_escape_string($db, $_POST['fname']);
+  $lname = mysqli_real_escape_string($db, $_POST['lname']);
+  $query = "UPDATE users SET username ='$username', fname = '$fname', lname = '$lname' WHERE username = '$sess_user' ";
+  $result = mysqli_query($db,$query);;
+  header('location: personalpage.php');
+}
+
+
+//UPDATE PERSONAL PASSWORD
+if (isset($_POST['update_passw'])) {
+  $row = getUserInfo();
+  $user = $row['username'];
+  $oldpassw = mysqli_real_escape_string($db, $_POST['old_passw']);
+  $newpassw1 = mysqli_real_escape_string($db, $_POST['new_pass1']);
+  $newpassw2 = mysqli_real_escape_string($db, $_POST['new_pass2']);
+  $crypt_passw = md5($newpassw1);
+  if ($row['password'] == md5($oldpassw) && $newpassw1 == $newpassw2){
+    $query = "UPDATE users SET password='$crypt_passw' WHERE username ='$user'";
+    $result = mysqli_query($db,$query);
+    header('location: personalpage.php');
+  }
+}
+
+//UPDATE EMAIL
+if (isset($_POST['update_email'])) {
+  $row = getUserInfo();
+  $user = $row['username'];
+  $oldemail = mysqli_real_escape_string($db, $_POST['old_email']);
+  $newemail = mysqli_real_escape_string($db, $_POST['new_email']);
+  if ($row['email'] == $oldemail){
+    $query = "UPDATE users SET email='$newemail' WHERE username ='$user'";
+    $result = mysqli_query($db,$query);
+    header('location: personalpage.php');
   }
 }
 
@@ -103,12 +142,11 @@ function checkAdmin(){
     $row = mysqli_fetch_assoc($result);
     return $row['username'] == 1;
  }
- return 0;
+ header('location: admin_required.php');
 }
 
-function getUserInfo(){
+function getUserInfo($username){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
-  $username = $_SESSION['username'];
   $sql = "SELECT * FROM users WHERE username='$username'";
   $result = mysqli_query($db, $sql);
   if (mysqli_num_rows($result) > 0){
@@ -116,6 +154,13 @@ function getUserInfo(){
     return $row;
  }
  return 0;
+}
+
+function checkSession(){
+  if (!isset($_SESSION['username'])){
+     header('location: login_required.php');
+  }
+  return;
 }
 
 ?>
