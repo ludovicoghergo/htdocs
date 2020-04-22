@@ -169,8 +169,8 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="widget personal-info">
 							<h3 class="widget-header user">Edit Personal Information</h3>
-							<form method="post" action="personalpage.php">
-                <?php echo '<input type="hidden" name="username" value='.$row['username'].'>' ?>
+							<form method="post" action="edit_user.php?username=<?php echo $user?>">
+                <?php echo '<input type="hidden" name="target" value='.$row['username'].'>' ?>
 								<!-- First Name -->
 								<div class="form-group">
 									<label for="first-name">First Name</label>
@@ -190,20 +190,21 @@
                  -->
 								<!-- Comunity Name -->
 								<div class="form-group">
-									<label for="comunity-name">Comunity Name</label>
+									<label for="comunity-name">Username</label>
 									<input type="text" name="username" class="form-control" id="comunity-name" value="<?php echo ucfirst($row['username'])?>">
 								</div>
 								<!-- Submit button -->
-								<button class="btn btn-transparent"  type="submit" name="update_personal">Save My Changes</button>
+								<button class="btn btn-transparent"  type="submit" name="admin_update_personal">Save My Changes</button>
 							</form>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6">
 						<!-- Change Password -->
 					<div class="widget change-password">
-            <?php echo '<input type="hidden" name="username" value='.$row['username'].'>' ?>
 						<h3 class="widget-header user">Edit Password</h3>
-						<form method="post" action="personalpage.php">
+						<form method="post" action="edit_user.php?username=<?php echo $user?>">
+              <?php echo '<input type="hidden" name="target" value='.$row['username'].'>' ?>
+
 							<!-- New Password -->
 							<div class="form-group">
 								<label for="new-password">New Password</label>
@@ -215,7 +216,7 @@
 								<input type="password" name="new_pass2" class="form-control" id="confirm-password">
 							</div>
 							<!-- Submit Button -->
-							<button class="btn btn-transparent" type="submit" name="admin_update">Change Password</button>
+							<button class="btn btn-transparent" type="submit" name="admin_update_password">Change Password</button>
 						</form>
 					</div>
 					</div>
@@ -223,15 +224,15 @@
 						<!-- Change Email Address -->
 					<div class="widget change-email mb-0">
 						<h3 class="widget-header user">Edit Email Address</h3>
-						<form action="#">
-              <?php echo '<input type="hidden" name="username" value='.$row['username'].'>' ?>
+						<form method="post" action="edit_user.php?username=<?php echo $user?>">
+              <?php echo '<input type="hidden" name="target" value='.$row['username'].'>' ?>
 							<!-- New email -->
 							<div class="form-group">
 								<label for="new-email">New email</label>
-								<input type="email" name='new_email' class="form-control" id="new-email">
+								<input type="email" name='email' class="form-control" id="new-email">
 							</div>
 							<!-- Submit Button -->
-							<button class="btn btn-transparent">Change email</button>
+							<button class="btn btn-transparent" type="submit" name="admin_update_email" >Change email</button>
 						</form>
 					</div>
 					</div>
