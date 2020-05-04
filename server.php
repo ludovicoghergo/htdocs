@@ -12,6 +12,8 @@ $db = mysqli_connect('localhost', 'root', '', 'mda');
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
+  $fname = mysqli_real_escape_string($db, $_POST['fname']);
+ $lname = mysqli_real_escape_string($db, $_POST['lname']);
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $email = mysqli_real_escape_string($db, $_POST['email']);
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
@@ -46,8 +48,8 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (username, email, password)
-  			  VALUES('$username', '$email', '$password')";
+  	$query = "INSERT INTO users (fname,lname,username, email, password)
+  			  VALUES('$fname','$lname','$username', '$email', '$password')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
@@ -110,16 +112,37 @@ if (isset($_POST['update_personal'])) {
 
 //UPDATE PERSONAL PASSWORD
 if (isset($_POST['update_passw'])) {
-  $row = getUserInfo();
+  $row = getUserInfo($_SESSION['username']);
   $user = $row['username'];
   $oldpassw = mysqli_real_escape_string($db, $_POST['old_passw']);
   $newpassw1 = mysqli_real_escape_string($db, $_POST['new_pass1']);
   $newpassw2 = mysqli_real_escape_string($db, $_POST['new_pass2']);
   $crypt_passw = md5($newpassw1);
-  if ($row['password'] == md5($oldpassw) && $newpassw1 == $newpassw2){
+  if ($row['password'] != md5($oldpassw)){
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Update Failed!</strong> your old password is incorrect.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>';
+  }
+  else if($newpassw1 != $newpassw2){
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Update Failed!</strong> passwords dont match.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>';
+  }
+  else{
     $query = "UPDATE users SET password='$crypt_passw' WHERE username ='$user'";
     $result = mysqli_query($db,$query);
-    header('location: personalpage.php');
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Update Succesfull!</strong> your data have been updated.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>';
   }
 }
 

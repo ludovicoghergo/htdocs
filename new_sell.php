@@ -1,3 +1,8 @@
+<?php include('server.php') ?>
+<?php
+  $user = $_SESSION['username'];
+  $row = getUserInfo($user);
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +42,7 @@
 </head>
 
 <body class="body-wrapper">
+
 
   <section>
   	<div class="container">
@@ -123,19 +129,85 @@
   		</div>
   	</div>
   </section>
+<!--==================================
+=            User Profile            =
+===================================-->
 
-<section class="section bg-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center mx-auto">
-                <div class="404-content">
-                    <h1 class="display-1 pt-1 pb-2">Access Denied</h1>
-                    <p class="px-3 pb-2 text-dark">Login is requires to access this page.</p>
-                    <a href="index.php" class="btn btn-info">GO HOME</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="user-profile section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+				<div class="sidebar">
+					<!-- User Widget -->
+					<div class="widget user">
+						<!-- User Image -->
+						<div class="image d-flex justify-content-center">
+							<img src="images/user/user-thumb.jpg" alt="" class="">
+						</div>
+						<!-- User Name -->
+						<h5 class="text-center">
+              <?php
+              echo ucfirst($row['fname']);
+              echo ' ';
+              echo ucfirst($row['lname'])
+              ?>
+            </h5>
+					</div>
+					<!-- Dashboard Links -->
+					<div class="widget dashboard-links">
+						<ul>
+							<li><a class="my-1 d-inline-block" href="new_sell.php">Nuova venta</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+				<!-- Edit Profile Welcome Text -->
+				<div class="widget welcome-message">
+					<h2>New Sell</h2>
+					<p>Insert here the product's data</p>
+				</div>
+				<!-- Edit Personal Info -->
+				<div class="row">
+					<div class="col-lg-12 col-md-12">
+						<div class="widget personal-info">
+							<h3 class="widget-header user">Product's Information</h3>
+							<form method="post" action="personalpage.php">
+								<!-- First Name -->
+								<div class="form-group">
+									<label for="first-name">Title</label>
+                  <input type="text" class="form-control" name="fname"  id="first-name">
+								</div>
+								<!-- Last Name -->
+								<div class="form-group">
+									<label for="last-name">Category</label>
+									<input type="text" class="form-control" name="lname" id="last-name">
+								</div>
+                <div class="form-group">
+									<label for="last-name">Description</label>
+									<input type="text" class="form-control" name="lname" id="last-name">
+								</div>
+                <div class="form-group">
+									<label for="last-name">Precio/H</label>
+									<input type="text" class="form-control" name="lname" id="last-name">
+								</div>
+								<div class="form-group">
+									<label for="last-name">Produc't photo</label>
+									<input type="file" class="form-control-file mt-2 pt-1" id="input-file">
+								 </div>
+
+								<!-- Submit button -->
+								<button class="btn btn-transparent"  type="submit" name="new_sell">Save My Changes</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!--============================

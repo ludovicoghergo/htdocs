@@ -62,11 +62,13 @@
   					<div class="collapse navbar-collapse" id="navbarSupportedContent">
   						<ul class="navbar-nav ml-auto main-nav ">
   							<li class="nav-item active">
-  								<a class="nav-link" href="index.html">Home</a>
+  								<a class="nav-link" href="index.php">Home</a>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
-  								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
-  								</a>
+  								<del>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
+  								  </a>
+                  </del>
 
   								<!-- Dropdown list -->
   								<div class="dropdown-menu">
@@ -78,9 +80,11 @@
   								</div>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
-  								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <del>
+                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   									Pages <span><i class="fa fa-angle-down"></i></span>
   								</a>
+                  </del>
   								<!-- Dropdown list -->
   								<div class="dropdown-menu">
   									<a class="dropdown-item" href="about-us.html">About Us</a>
@@ -96,9 +100,11 @@
   								</div>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
-  								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <del>
+                  <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   									Listing <span><i class="fa fa-angle-down"></i></span>
   								</a>
+                  </del>
   								<!-- Dropdown list -->
   								<div class="dropdown-menu">
   									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
