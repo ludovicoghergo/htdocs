@@ -175,32 +175,36 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="widget personal-info">
 							<h3 class="widget-header user">Product's Information</h3>
-							<form method="post" action="personalpage.php">
+							<form method="post" action="new_sell.php">
 								<!-- First Name -->
 								<div class="form-group">
 									<label for="first-name">Title</label>
-                  <input type="text" class="form-control" name="fname"  id="first-name">
+                  <input type="text" class="form-control" name="title"  id="first-name">
 								</div>
 								<!-- Last Name -->
 								<div class="form-group">
 									<label for="last-name">Category</label>
-									<input type="text" class="form-control" name="lname" id="last-name">
+									<input type="text" class="form-control" name="category" id="last-name">
 								</div>
                 <div class="form-group">
 									<label for="last-name">Description</label>
-									<input type="text" class="form-control" name="lname" id="last-name">
+									<input type="text" class="form-control" name="desc" id="last-name">
 								</div>
                 <div class="form-group">
 									<label for="last-name">Precio/H</label>
-									<input type="text" class="form-control" name="lname" id="last-name">
+									<input type="text" class="form-control" name="precio" id="last-name">
 								</div>
-								<div class="form-group">
+                <div class="form-group">
+									<label for="last-name">Location</label>
+									<input type="text" class="form-control" name="location" id="last-name">
+								</div>
+								<!--<div class="form-group">
 									<label for="last-name">Produc't photo</label>
-									<input type="file" class="form-control-file mt-2 pt-1" id="input-file">
+									<input type="file" class="form-control-file mt-2 pt-1" name="photo"   id="input-file">
 								 </div>
-
+               -->
 								<!-- Submit button -->
-								<button class="btn btn-transparent"  type="submit" name="new_sell">Save My Changes</button>
+								<button class="btn btn-transparent"  type="submit" name="new_sell">OK</button>
 							</form>
 						</div>
 					</div>
@@ -210,9 +214,6 @@
 	</div>
 </section>
 
-<!--============================
-=            Footer            =
-=============================-->
 
 <footer class="footer section section-sm">
   <!-- Container Start -->

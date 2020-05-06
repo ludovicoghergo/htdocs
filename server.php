@@ -242,6 +242,23 @@ if(isset($_POST['admin_update_email'])){
   }
 }
 
+//INSERT NEW SELL
+if(isset($_POST['new_sell'])){
+  $username = $_SESSION['username'];
+  $user = getUserInfo($username);
+  $usID = $user['ID'];
+  $title = mysqli_real_escape_string($db, $_POST['title']);
+  $category = mysqli_real_escape_string($db, $_POST['category']);
+  $desc = mysqli_real_escape_string($db, $_POST['desc']);
+  $precio = mysqli_real_escape_string($db, $_POST['precio']);
+  $location = mysqli_real_escape_string($db, $_POST['location']);
+  $date = date("Y-m-d H:i:s");
+  $query = "INSERT INTO sell (title,category,description, precio, id_user, location, creation_time)
+        VALUES('$title','$category','$desc', '$precio', '$usID','$location','$date')";
+  mysqli_query($db, $query);
+}
+
+
 function checkAdmin(){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $username = $_SESSION['username'];
@@ -263,6 +280,27 @@ function getUserInfo($username){
     return $row;
  }
  return 0;
+}
+
+function getAllSells($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllCategories(){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT DISTINCT category FROM sell LIMIT 5";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllLocation(){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT DISTINCT location FROM sell LIMIT 5";
+  $result = mysqli_query($db, $sql);
+  return $result;
 }
 
 function checkSession(){
