@@ -1,11 +1,13 @@
 <?php
-    include('server.php');
-    if(isset($_GET['page'])){
-      $page = $_GET['page'];
-    }else $page = 0;
-    $allsells = getAllSells($page*9);
-    $categories = getAllCategories();
-    $locations = getAllLocation();
+  include('server.php');
+  if(isset($_GET['sells_id'])){
+    $sell_id = $_GET['sells_id'];
+  }else header('404.html');
+  $sell  = getSell($sell_id);
+   if (mysqli_num_rows($sell) > 0)
+    $product = mysqli_fetch_assoc($sell);
+  else
+    header('404.html');
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +67,7 @@
 								<a class="nav-link" href="index.html">Home</a>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="category.php">Category<span><i class="fa fa-angle-down"></i></span>
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
 								</a>
 
 								<!-- Dropdown list -->
@@ -148,181 +150,234 @@
 		</div>
 	</div>
 </section>
-<section class="section-sm">
+<!--===================================
+=            Store Section            =
+====================================-->
+<section class="section bg-gray">
+	<!-- Container Start -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="search-result bg-gray">
-					<h2>Catalog</h2>
-					<?php
-            $number_results = mysqli_num_rows($allsells);
-            echo "$number_results articles on sale";
-          ?>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<div class="category-sidebar">
-					<div class="widget category-list">
-	<h4 class="widget-header">Top Categories</h4>
-	<ul class="category-list">
-    <?php if (mysqli_num_rows($categories) > 0):?>
-      <?php while($cat = mysqli_fetch_assoc($categories)): ?>
-        <li><a href="#"><?php echo $cat['category'] ?></a></li>
-      <?php endwhile ?>
-    <?php endif ?>
-	</ul>
-</div>
+			<!-- Left sidebar -->
+			<div class="col-md-8">
+				<div class="product-details">
+					<h1 class="product-title"><?php echo $product['title']?></h1>
+					<div class="product-meta">
+						<ul class="list-inline">
+							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href=""><?php echo ucfirst($product['fname'])?></a></li>
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href=""><?php echo ucfirst($product['category'])?></a></li>
+							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href=""><?php echo ucfirst($product['location'])?></a></li>
+						</ul>
+					</div>
 
-<div class="widget category-list">
-	<h4 class="widget-header">Areas</h4>
-	<ul class="category-list">
-    <?php if (mysqli_num_rows($locations) > 0):?>
-      <?php while ($loc = mysqli_fetch_assoc($locations)): ?>
-        <li><a href="#"><?php echo $loc['location'] ?></a></li>
-      <?php endwhile ?>
-    <?php endif ?>
-	</ul>
-</div>
-
-<div class="widget filter">
-	<h4 class="widget-header">Show Produts</h4>
-	<select>
-		<option>Popularity</option>
-		<option value="1">Top rated</option>
-		<option value="2">Lowest Price</option>
-		<option value="4">Highest Price</option>
-	</select>
-</div>
-
-<div class="widget price-range w-100">
-	<h4 class="widget-header">Price Range</h4>
-	<div class="block">
-						<input class="range-track w-100" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="5"
-						data-slider-value="[0,5000]">
-				<div class="d-flex justify-content-between mt-2">
-						<span class="value">$10 - $5000</span>
-				</div>
-	</div>
-</div>
-
-<div class="widget product-shorting">
-	<h4 class="widget-header">By Condition</h4>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Brand New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Almost New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Gently New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Havely New
-	  </label>
-	</div>
-</div>
-
-				</div>
-			</div>
-			<div class="col-md-9">
-				<div class="category-search-filter">
-					<div class="row">
-						<div class="col-md-6">
-							<strong>Short</strong>
-							<select>
-								<option>Most Recent</option>
-								<option value="1">Most Popular</option>
-								<option value="2">Lowest Price</option>
-								<option value="4">Highest Price</option>
-							</select>
+					<!-- product slider -->
+					<div class="product-slider">
+						<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
+							<img class="img-fluid w-100" src="images/products/products-1.jpg" alt="product-img">
 						</div>
-						<div class="col-md-6">
-							<div class="view">
-								<strong>Views</strong>
-								<ul class="list-inline view-switcher">
-									<li class="list-inline-item">
-										<a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
-									</li>
-									<li class="list-inline-item">
-										<a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
-									</li>
-								</ul>
+						<div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
+							<img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Second slide">
+						</div>
+						<div class="product-slider-item my-4" data-image="images/products/products-3.jpg">
+							<img class="d-block img-fluid w-100" src="images/products/products-3.jpg" alt="Third slide">
+						</div>
+						<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
+							<img class="d-block img-fluid w-100" src="images/products/products-1.jpg" alt="Third slide">
+						</div>
+						<div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
+							<img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Third slide">
+						</div>
+					</div>
+					<!-- product slider -->
+
+					<div class="content mt-5 pt-5">
+						<ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
+								 aria-selected="true">Product Details</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
+								 aria-selected="false">Specifications</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
+								 aria-selected="false">Reviews</a>
+							</li>
+						</ul>
+						<div class="tab-content" id="pills-tabContent">
+							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+								<h3 class="tab-title">Product Description</h3>
+								<p><?php echo ucfirst($product['description'])?></p>
+
+							</div>
+							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+								<h3 class="tab-title">Product Specifications</h3>
+								<table class="table table-bordered product-table">
+									<tbody>
+										<tr>
+											<td>Seller Price</td>
+											<td><?php echo $product['precio']?></td>
+										</tr>
+										<tr>
+											<td>Added</td>
+											<td><?php echo ucfirst($product['creation_time'])?></td>
+										</tr>
+										<tr>
+											<td>State</td>
+											<td>Dhaka</td>
+										</tr>
+										<tr>
+											<td>Brand</td>
+											<td>Apple</td>
+										</tr>
+										<tr>
+											<td>Condition</td>
+											<td>Used</td>
+										</tr>
+										<tr>
+											<td>Model</td>
+											<td>2017</td>
+										</tr>
+										<tr>
+											<td>State</td>
+											<td>Dhaka</td>
+										</tr>
+										<tr>
+											<td>Battery Life</td>
+											<td>23</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+								<h3 class="tab-title">Product Review</h3>
+								<div class="product-review">
+									<div class="media">
+										<!-- Avater -->
+										<img src="images/user/user-thumb.jpg" alt="avater">
+										<div class="media-body">
+											<!-- Ratings -->
+											<div class="ratings">
+												<ul class="list-inline">
+													<li class="list-inline-item">
+														<i class="fa fa-star"></i>
+													</li>
+													<li class="list-inline-item">
+														<i class="fa fa-star"></i>
+													</li>
+													<li class="list-inline-item">
+														<i class="fa fa-star"></i>
+													</li>
+													<li class="list-inline-item">
+														<i class="fa fa-star"></i>
+													</li>
+													<li class="list-inline-item">
+														<i class="fa fa-star"></i>
+													</li>
+												</ul>
+											</div>
+											<div class="name">
+												<h5>Jessica Brown</h5>
+											</div>
+											<div class="date">
+												<p>Mar 20, 2018</p>
+											</div>
+											<div class="review-comment">
+												<p>
+													Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe laudant tota rem ape
+													riamipsa eaque.
+												</p>
+											</div>
+										</div>
+									</div>
+									<div class="review-submission">
+										<h3 class="tab-title">Submit your review</h3>
+										<!-- Rate -->
+										<div class="rate">
+											<div class="starrr"></div>
+										</div>
+										<div class="review-submit">
+											<form action="#" class="row">
+												<div class="col-lg-6">
+													<input type="text" name="name" id="name" class="form-control" placeholder="Name">
+												</div>
+												<div class="col-lg-6">
+													<input type="email" name="email" id="email" class="form-control" placeholder="Email">
+												</div>
+												<div class="col-12">
+													<textarea name="review" id="review" rows="10" class="form-control" placeholder="Message"></textarea>
+												</div>
+												<div class="col-12">
+													<button type="submit" class="btn btn-main">Sumbit</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="product-grid-list">
-					<div class="row mt-30">
-
-            <?php if (mysqli_num_rows($allsells) > 0):?>
-              <?php while($sell = mysqli_fetch_assoc($allsells)): ?>
-                <div class="col-sm-12 col-lg-4 col-md-6">
-                  <div class="product-item bg-light">
-                    <div class="card">
-                      <div class="thumb-content">
-                        <a href="product.php?sells_id=<?php echo $sell['ID']  ?>">
-                          <img class="card-img-top img-fluid" src="images/products/products-2.jpg" alt="Card image cap">
-                        </a>
-                      </div>
-                      <div class="card-body">
-                        <h4 class="card-title"><a href="product.php?sells_id=<?php echo $sell['ID']  ?>"><?php echo $sell['title'] ?></a></h4>
-                        <ul class="list-inline product-meta">
-                          <li class="list-inline-item">
-                            <a href="single.html"><i class="fa fa-folder-open-o"></i><?php echo $sell['category'] ?></a>
-                          </li>
-                          <li class="list-inline-item">
-                            <a href="#"><i class="fa fa-calendar"></i><?php echo $sell['creation_time'] ?></a>
-                          </li>
-                        </ul>
-                        <p class="card-text"><?php echo $sell['description'] ?></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <?php endwhile ?>
-            <?php endif ?>
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+					<div class="widget price text-center">
+						<h4>Price</h4>
+						<p>$230</p>
 					</div>
-				</div>
-				<div class="pagination justify-content-center">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-
-							<li class="page-item">
-								<a class="page-link" href= 'category.php?page=<?php echo ($page - 1) ?>'aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-								</a>
-							</li>
-
-							<li class="page-item"><a class="page-link" href="#"><?php echo ($page+1) ?></a></li>
-							<li class="page-item "><a class="page-link" href="#"><?php echo ($page+2) ?></a></li>
-							<li class="page-item"><a class="page-link" href="#"><?php echo ($page+3) ?></a></li>
-							<li class="page-item">
-								<a class="page-link" href='category.php?page=<?php echo ($page + 1) ?>' aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								</a>
-							</li>
-
+					<!-- User Profile widget -->
+					<div class="widget user text-center">
+						<img class="rounded-circle img-fluid mb-5 px-5" src="images/user/user-thumb.jpg" alt="">
+						<h4><a href="">Jonathon Andrew</a></h4>
+						<p class="member-time">Member Since Jun 27, 2017</p>
+						<a href="">See all ads</a>
+						<ul class="list-inline mt-20">
+							<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a></li>
+							<li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">Make an
+									offer</a></li>
 						</ul>
-					</nav>
+					</div>
+					<!-- Map Widget -->
+					<div class="widget map">
+						<div class="map">
+							<div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
+						</div>
+					</div>
+					<!-- Rate Widget -->
+					<div class="widget rate">
+						<!-- Heading -->
+						<h5 class="widget-header text-center">What would you rate
+							<br>
+							this product</h5>
+						<!-- Rate -->
+						<div class="starrr"></div>
+					</div>
+					<!-- Safety tips widget -->
+					<div class="widget disclaimer">
+						<h5 class="widget-header">Safety Tips</h5>
+						<ul>
+							<li>Meet seller at a public place</li>
+							<li>Check the item before you buy</li>
+							<li>Pay only after collecting the item</li>
+							<li>Pay only after collecting the item</li>
+						</ul>
+					</div>
+					<!-- Coupon Widget -->
+					<div class="widget coupon text-center">
+						<!-- Coupon description -->
+						<p>Have a great product to post ? Share it with
+							your fellow users.
+						</p>
+						<!-- Submii button -->
+						<a href="" class="btn btn-transparent-white">Submit Listing</a>
+					</div>
+
 				</div>
 			</div>
+
 		</div>
 	</div>
+	<!-- Container End -->
 </section>
 <!--============================
 =            Footer            =

@@ -19,15 +19,35 @@ if (isset($_POST['reg_user'])) {
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
 
-  // form validation: ensure that the form is correctly filled ...
-  // by adding (array_push()) corresponding error unto $errors array
-  if (empty($username)) { array_push($errors, "Username is required"); }
-  if (empty($email)) { array_push($errors, "Email is required"); }
-  if (empty($password_1)) { array_push($errors, "Password is required"); }
-  if ($password_1 != $password_2) {
-	array_push($errors, "The two passwords do not match");
-  }
 
+  if (empty($fname)){
+     alertBox("Insert your first name",0);
+     return;
+     }
+  if (empty($lname)){
+      alertBox("Insert your first name",0);
+      return;
+      }
+  if (empty($username)){
+      alertBox("Please insert your username",0);
+      return;
+      }
+  if (empty($email)){
+      alertBox("Please insert a email",0);
+      return;
+      }
+  if (empty($password_1)){
+      alertBox("Please insert the password",0);
+      return;
+      }
+  if (empty($password_2)){
+      alertBox("Please insert the verification password",0);
+      return;
+      }
+  if($password_1 != $password_2){
+    alertBox("Password doesnt match",0);
+    return;
+  }
   // first check the database to make sure
   // a user does not already exist with the same username and/or email
   $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
@@ -36,11 +56,13 @@ if (isset($_POST['reg_user'])) {
 
   if ($user) { // if user exists
     if ($user['username'] === $username) {
-      array_push($errors, "Username already exists");
+      alertBox("Username already exist",0);
+      return;
     }
 
     if ($user['email'] === $email) {
-      array_push($errors, "email already exists");
+      alertBox("email already exist",0);
+      return;
     }
   }
 
@@ -64,10 +86,12 @@ if (isset($_POST['login_user'])) {
   $password = mysqli_real_escape_string($db, $_POST['password']);
 
   if (empty($username)) {
-  	array_push($errors, "Username is required");
+    alertBox("Insert your username",0);
+    return;
   }
   if (empty($password)) {
-  	array_push($errors, "Password is required");
+    alertBox("Insert your password",0);
+    return;
   }
 
   if (count($errors) == 0) {
@@ -76,14 +100,9 @@ if (isset($_POST['login_user'])) {
   	$results = mysqli_query($db, $query);
   	if (mysqli_num_rows($results) == 1) {
   	  $_SESSION['username'] = $username;
-  	  $_SESSION['success'] = "You are now logged in";
   	}else {
-        	  echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Login Failed!</strong> Please insert your data correctly.
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>';
+      alertBox("Login Failed",0);
+      return;
   	}
   }
 }
@@ -92,9 +111,11 @@ if (isset($_GET['del_user'])) {
   $username = mysqli_real_escape_string($db, $_GET['del_user']);
   $query = "DELETE FROM users WHERE username='$username'";
   if(mysqli_query($db, $query)){
-    echo '<div class="alert alert-success"> Account Eliminated </div>';
+    alertBox("Account Eliminated",);
+    return;
   }else{
-    echo '<div class="alert alert-danger"> Something didnt workout </div>';
+    alertBox("The account couldnt be eliminated",0);
+    return;
   }
 }
 
@@ -104,6 +125,21 @@ if (isset($_POST['update_personal'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $fname = mysqli_real_escape_string($db, $_POST['fname']);
   $lname = mysqli_real_escape_string($db, $_POST['lname']);
+
+  if (empty($username)) {
+    alertBox("Insert your username",0);
+    return;
+  }
+  if (empty($fname)) {
+    alertBox("Insert your first name",0);
+    return;
+  }
+  if (empty($lname)) {
+    alertBox("Insert your last name",0);
+    return;
+  }
+
+
   $query = "UPDATE users SET username ='$username', fname = '$fname', lname = '$lname' WHERE username = '$sess_user' ";
   $result = mysqli_query($db,$query);
   header('location: personalpage.php');
@@ -117,32 +153,35 @@ if (isset($_POST['update_passw'])) {
   $oldpassw = mysqli_real_escape_string($db, $_POST['old_passw']);
   $newpassw1 = mysqli_real_escape_string($db, $_POST['new_pass1']);
   $newpassw2 = mysqli_real_escape_string($db, $_POST['new_pass2']);
+
+  if (empty($oldpassw)) {
+    alertBox("Insert your old password",0);
+    return;
+  }
+  if (empty($newpassw1)) {
+    alertBox("Insert your password",0);
+    return;
+  }
+  if (empty($newpassw2)) {
+    alertBox("Insert your verification password",0);
+    return;
+  }
+
+
   $crypt_passw = md5($newpassw1);
   if ($row['password'] != md5($oldpassw)){
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Update Failed!</strong> your old password is incorrect.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                </div>';
+    alertBox("You old password is not valid",0);
+    return;
   }
   else if($newpassw1 != $newpassw2){
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Update Failed!</strong> passwords dont match.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                </div>';
+    alertBox("Passowrd doesnt match",0);
+    return;
   }
   else{
     $query = "UPDATE users SET password='$crypt_passw' WHERE username ='$user'";
     $result = mysqli_query($db,$query);
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Update Succesfull!</strong> your data have been updated.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                </div>';
+    alertBox("Update have been made",1);
+    return;
   }
 }
 
@@ -152,10 +191,26 @@ if (isset($_POST['update_email'])) {
   $user = $row['username'];
   $oldemail = mysqli_real_escape_string($db, $_POST['old_email']);
   $newemail = mysqli_real_escape_string($db, $_POST['new_email']);
+
+  if (empty($oldemail)) {
+    alertBox("Insert your username",0);
+    return;
+  }
+  if (empty($newemail)) {
+    alertBox("Insert your password",0);
+    return;
+  }
+
   if ($row['email'] == $oldemail){
     $query = "UPDATE users SET email='$newemail' WHERE username ='$user'";
     $result = mysqli_query($db,$query);
     header('location: personalpage.php');
+  }
+  else{
+    if (empty($username)) {
+      alertBox("Your old email is incorrect",0);
+      return;
+    }
   }
 }
 
@@ -168,19 +223,11 @@ if(isset($_POST['admin_update_personal'])){
   $query = "UPDATE users SET username ='$username', fname = '$fname', lname = '$lname' WHERE username = '$target' ";
   $result = mysqli_query($db,$query);
   if($result){
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Updated succesfully!</strong> data have been updated.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>';
+    alertBox("Update have been made",1);
+    return;
   }else{
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Update Failed!</strong> please try again.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                </div>';
+    alertBox("Update have been not made",0);
+    return;
   }
 }
 
@@ -191,31 +238,18 @@ if(isset($_POST['admin_update_password'])){
   $target = mysqli_real_escape_string($db, $_POST['target']);
   $crypted = md5($pass1);
   if($pass1 != $pass2){
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Update Failed!</strong> passwords dont match.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                </div>';
+    alertBox("Password doesnt match",0);
+    return;
                 return;
   }
   $query = "UPDATE users SET password ='' WHERE username = '$target' ";
   $result = mysqli_query($db,$query);
   if($result){
-              //  header('location: admin.php');
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Updated succesfully!</strong> data have been updated.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>';
+    alertBox("Update have been made",1);
+    return;
   }else{
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Update Failed!</strong> please try again.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                </div>';
+    alertBox("Update have been not made",0);
+    return;
   }
 }
 
@@ -226,19 +260,11 @@ if(isset($_POST['admin_update_email'])){
   $query = "UPDATE users SET email='$email' WHERE username = '$target' ";
   $result = mysqli_query($db,$query);
   if($result){
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Updated succesfully!</strong> data have been updated.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>';
+    alertBox("Update have been made",1);
+    return;
   }else{
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Update Failed!</strong> please try again.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                </div>';
+    alertBox("Update have been not made",0);
+    return;
   }
 }
 
@@ -252,12 +278,61 @@ if(isset($_POST['new_sell'])){
   $desc = mysqli_real_escape_string($db, $_POST['desc']);
   $precio = mysqli_real_escape_string($db, $_POST['precio']);
   $location = mysqli_real_escape_string($db, $_POST['location']);
+
+  if (empty($username)){
+     alertBox("Please Login",0);
+     return;
+     }
+  if (empty($title)){
+      alertBox("Please insert a title",0);
+      return;
+      }
+  if (empty($category)){
+      alertBox("Please insert a category",0);
+      return;
+      }
+  if (empty($desc)){
+      alertBox("Please insert a description",0);
+      return;
+      }
+  if (empty($precio)){
+      alertBox("Please insert a precio",0);
+      return;
+      }
+  if (empty($location)){
+      alertBox("Please insert a location",0);
+      return;
+      }
+
+
   $date = date("Y-m-d H:i:s");
   $query = "INSERT INTO sell (title,category,description, precio, id_user, location, creation_time)
         VALUES('$title','$category','$desc', '$precio', '$usID','$location','$date')";
-  mysqli_query($db, $query);
+  $result = mysqli_query($db, $query);
+  if($result){
+    alertBox("Sell inserted",1);
+  }else{
+    alertBox("Something didn't work out",0);
+  }
 }
 
+function alertBox($message,$success){
+  if($success){
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success!</strong> '.$message.'
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>';
+  }else{
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> '.$message.'
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>';
+  }
+}
 
 function checkAdmin(){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
@@ -281,7 +356,7 @@ function getUserInfo($username){
  }
  return 0;
 }
-  
+
 function getAllSells($index){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $sql = "SELECT * FROM sell LIMIT 9 OFFSET $index ";
@@ -299,6 +374,14 @@ function getAllCategories(){
 function getAllLocation(){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $sql = "SELECT DISTINCT location FROM sell LIMIT 5";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getSell($sell_id){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $id = mysqli_real_escape_string($db, $sell_id);
+  $sql = "SELECT * FROM sell as s,users as u WHERE u.ID = s.id_user AND s.ID = $id";
   $result = mysqli_query($db, $sql);
   return $result;
 }
