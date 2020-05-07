@@ -281,7 +281,7 @@ function getUserInfo($username){
  }
  return 0;
 }
-
+  
 function getAllSells($index){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $sql = "SELECT * FROM sell LIMIT 9 OFFSET $index ";
