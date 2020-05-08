@@ -131,7 +131,7 @@
                 <div class="col-lg-5 col-md-8 align-item-center">
                     <div class="border border">
                         <h3 class="bg-gray p-4">Register Now</h3>
-                        <form method="post" action="register.php">
+                        <form method="post" action="register.php" enctype="multipart/form-data">
                             <fieldset class="p-4">
                               <input type="text" placeholder="First name*" name="fname"  class="border p-3 w-100 my-2">
                               <input type="text" placeholder="Last name*" name="lname" class="border p-3 w-100 my-2">
@@ -139,6 +139,7 @@
                                 <input type="email" placeholder="Email*" name="email"  class="border p-3 w-100 my-2">
                                 <input type="password" placeholder="Password*" name="password_1" class="border p-3 w-100 my-2">
                                 <input type="password" placeholder="Confirm Password*" name="password_2" class="border p-3 w-100 my-2">
+                                <input type="file" name="avatar">
                                 <div class="loggedin-forgot d-inline-flex my-3">
                                         <input type="checkbox" id="registering" class="mt-1">
                                         <label for="registering" class="px-2">By registering, you accept our <a class="text-primary font-weight-bold" href="terms-condition.html">Terms & Conditions</a></label>

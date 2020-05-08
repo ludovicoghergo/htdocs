@@ -12,13 +12,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
+
   <!-- SITE TITTLE -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Classimax</title>
-
   <!-- FAVICON -->
   <link href="img/favicon.png" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
@@ -36,6 +35,7 @@
   <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
+
 
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -323,34 +323,30 @@
 				<div class="sidebar">
 					<div class="widget price text-center">
 						<h4>Price</h4>
-						<p>$230</p>
+						<p>$<?php echo $product['precio'] ?></p>
 					</div>
 					<!-- User Profile widget -->
 					<div class="widget user text-center">
 						<img class="rounded-circle img-fluid mb-5 px-5" src="images/user/user-thumb.jpg" alt="">
-						<h4><a href="">Jonathon Andrew</a></h4>
+						<h4><a href="">
+              <?php
+              echo ucfirst($product['fname']) .'  '.ucfirst($product['lname']);
+              ?>
+          </a></h4>
 						<p class="member-time">Member Since Jun 27, 2017</p>
 						<a href="">See all ads</a>
 						<ul class="list-inline mt-20">
-							<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a></li>
-							<li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">Make an
-									offer</a></li>
+							<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3 ">Contact</a></li>
+
+              <li class="list-inline-item" >
+                <form method="POST" action="product.php?sells_id=<?php echo $product['sell_id'] ?>">
+                  <input type="hidden"  name="us_id" value="<?php echo $product['us_id'] ?>">
+                  <input type="hidden"  name="sell_id" value="<?php echo $product['sell_id'] ?>">
+                  <input type="submit" name="buy_product" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3"  value="Lease">
+                </form>
+
+              </li>
 						</ul>
-					</div>
-					<!-- Map Widget -->
-					<div class="widget map">
-						<div class="map">
-							<div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
-						</div>
-					</div>
-					<!-- Rate Widget -->
-					<div class="widget rate">
-						<!-- Heading -->
-						<h5 class="widget-header text-center">What would you rate
-							<br>
-							this product</h5>
-						<!-- Rate -->
-						<div class="starrr"></div>
 					</div>
 					<!-- Safety tips widget -->
 					<div class="widget disclaimer">
@@ -482,6 +478,8 @@
 </footer>
 
 <!-- JAVASCRIPTS -->
+
+
 <script src="plugins/jQuery/jquery.min.js"></script>
 <script src="plugins/bootstrap/js/popper.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -497,6 +495,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
 <script src="plugins/google-map/gmap.js"></script>
 <script src="js/script.js"></script>
+
 
 </body>
 

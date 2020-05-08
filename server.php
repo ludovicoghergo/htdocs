@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+define ('SITE_ROOT', realpath(dirname(__FILE__)));
 // initializing variables
 $username = "";
 $email    = "";
@@ -18,6 +18,10 @@ if (isset($_POST['reg_user'])) {
   $email = mysqli_real_escape_string($db, $_POST['email']);
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+
+  $tmpFile = $_FILES['avatar']['tmp_name'];
+  $newFile = $_FILES['avatar']['name'];
+  move_uploaded_file($tmpFile, "./images/user/".$newFile);
 
 
   if (empty($fname)){
@@ -70,12 +74,12 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (fname,lname,username, email, password)
-  			  VALUES('$fname','$lname','$username', '$email', '$password')";
+  	$query = "INSERT INTO users (fname,lname,username, email, password,avatar)
+  			  VALUES('$fname','$lname','$username', '$email', '$password','$newFile')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
-  	header('location: index.php');
+  //	header('location: index.php');
   }
 }
 
@@ -268,6 +272,23 @@ if(isset($_POST['admin_update_email'])){
   }
 }
 
+//New Lease
+if(isset($_POST['buy_product'])){
+  $us_id = mysqli_real_escape_string($db, $_POST['us_id']);
+  $sell_id = mysqli_real_escape_string($db, $_POST['sell_id']);
+  $date = date("Y-m-d H:i:s");
+  $query = "INSERT INTO orders (id_sell,id_client,start_time,state)
+        VALUES('$sell_id','$us_id','$date','active')";
+  $result = mysqli_query($db, $query);
+  if($result){
+    alertBox("Item has been purchased",1);
+  }else{
+    alertBox("Something didn't work out",0);
+  }
+
+}
+
+
 //INSERT NEW SELL
 if(isset($_POST['new_sell'])){
   $username = $_SESSION['username'];
@@ -381,7 +402,7 @@ function getAllLocation(){
 function getSell($sell_id){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $id = mysqli_real_escape_string($db, $sell_id);
-  $sql = "SELECT * FROM sell as s,users as u WHERE u.ID = s.id_user AND s.ID = $id";
+  $sql = "SELECT *, u.ID as us_id, s.ID as sell_id FROM sell as s,users as u WHERE u.ID = s.id_user AND s.ID = $id";
   $result = mysqli_query($db, $sql);
   return $result;
 }
