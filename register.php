@@ -58,19 +58,8 @@
   								<a class="nav-link" href="index.php">Home</a>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
-  								<del>
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
+                    <a class="nav-link dropdown-toggle"  href="category.php">Catalog<span></span>
   								  </a>
-                  </del>
-
-  								<!-- Dropdown list -->
-  								<div class="dropdown-menu">
-  									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
-  									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
-  									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
-  									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
-  									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
-  								</div>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
                   <del>
@@ -125,33 +114,6 @@
   		</div>
   	</div>
   </section>
-  <section class="login py-5 border-top-1">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-5 col-md-8 align-item-center">
-                    <div class="border border">
-                        <h3 class="bg-gray p-4">Register Now</h3>
-                        <form method="post" action="register.php" enctype="multipart/form-data">
-                            <fieldset class="p-4">
-                              <input type="text" placeholder="First name*" name="fname"  class="border p-3 w-100 my-2">
-                              <input type="text" placeholder="Last name*" name="lname" class="border p-3 w-100 my-2">
-                              <input type="text" placeholder="Username*" name="username" class="border p-3 w-100 my-2">
-                                <input type="email" placeholder="Email*" name="email"  class="border p-3 w-100 my-2">
-                                <input type="password" placeholder="Password*" name="password_1" class="border p-3 w-100 my-2">
-                                <input type="password" placeholder="Confirm Password*" name="password_2" class="border p-3 w-100 my-2">
-                                <input type="file" name="avatar">
-                                <div class="loggedin-forgot d-inline-flex my-3">
-                                        <input type="checkbox" id="registering" class="mt-1">
-                                        <label for="registering" class="px-2">By registering, you accept our <a class="text-primary font-weight-bold" href="terms-condition.html">Terms & Conditions</a></label>
-                                </div>
-                                <button type="submit"  name="reg_user" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold">Register Now</button>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 <!--============================
 =            Footer            =
 =============================-->

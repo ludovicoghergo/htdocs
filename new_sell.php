@@ -62,19 +62,8 @@
   								<a class="nav-link" href="index.php">Home</a>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
-  								<del>
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
+                    <a class="nav-link dropdown-toggle"  href="category.php">Catalog<span></span>
   								  </a>
-                  </del>
-
-  								<!-- Dropdown list -->
-  								<div class="dropdown-menu">
-  									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
-  									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
-  									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
-  									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
-  									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
-  								</div>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
                   <del>

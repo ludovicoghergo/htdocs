@@ -1,14 +1,11 @@
+<?php include('server.php') ?>
 <?php
-  include('server.php');
-  if(isset($_GET['sells_id'])){
-    $sell_id = $_GET['sells_id'];
-  }else header('404.html');
-  $sell  = getSell($sell_id);
-   if (mysqli_num_rows($sell) > 0)
-    $product = mysqli_fetch_assoc($sell);
-  else
-    header('404.html');
- ?>
+    checkSession();
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($db, $sql);
+    $user = $_SESSION['username'];
+    $personal = getUserInfo($user);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +15,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Classimax</title>
+
   <!-- FAVICON -->
   <link href="img/favicon.png" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
@@ -35,7 +33,6 @@
   <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
-
 
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -67,8 +64,19 @@
   								<a class="nav-link" href="index.php">Home</a>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
-                    <a class="nav-link dropdown-toggle"  href="category.php">Catalog<span></span>
+  								<del>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
   								  </a>
+                  </del>
+
+  								<!-- Dropdown list -->
+  								<div class="dropdown-menu">
+  									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
+  									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
+  									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
+  									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
+  									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
+  								</div>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
                   <del>
@@ -123,237 +131,183 @@
   		</div>
   	</div>
   </section>
-<section class="page-search">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Advance Search -->
-				<div class="advance-search">
-					<form>
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
-							</div>
-							<div class="form-group col-md-3">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
-							</div>
-							<div class="form-group col-md-3">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
-							</div>
-							<div class="form-group col-md-2">
-
-								<button type="submit" class="btn btn-primary">Search Now</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!--===================================
-=            Store Section            =
-====================================-->
-<section class="section bg-gray">
+<!--==================================
+=            User Profile            =
+===================================-->
+<section class="dashboard section">
 	<!-- Container Start -->
 	<div class="container">
+		<!-- Row Start -->
 		<div class="row">
-			<!-- Left sidebar -->
-			<div class="col-md-8">
-				<div class="product-details">
-					<h1 class="product-title"><?php echo $product['title']?></h1>
-					<div class="product-meta">
-						<ul class="list-inline">
-							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href=""><?php echo ucfirst($product['fname'])?></a></li>
-							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href=""><?php echo ucfirst($product['category'])?></a></li>
-							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href=""><?php echo ucfirst($product['location'])?></a></li>
-						</ul>
-					</div>
-
-					<!-- product slider -->
-					<div class="product-slider">
-						<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
-							<img class="img-fluid w-100" src="images/products/products-1.jpg" alt="product-img">
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Second slide">
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-3.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-3.jpg" alt="Third slide">
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-1.jpg" alt="Third slide">
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Third slide">
-						</div>
-					</div>
-					<!-- product slider -->
-
-					<div class="content mt-5 pt-5">
-						<ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
-							<li class="nav-item">
-								<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
-								 aria-selected="true">Product Details</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
-								 aria-selected="false">Specifications</a>
-							</li>
-							<li class="nav-item">
-								<del><a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
-								 aria-selected="false">Reviews</a></del>
-							</li>
-						</ul>
-						<div class="tab-content" id="pills-tabContent">
-							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-								<h3 class="tab-title">Product Description</h3>
-								<p><?php echo ucfirst($product['description'])?></p>
-
-							</div>
-							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-								<h3 class="tab-title">Product Specifications</h3>
-								<table class="table table-bordered product-table">
-									<tbody>
-										<tr>
-											<td>Seller Price</td>
-											<td><?php echo $product['precio']?></td>
-										</tr>
-										<tr>
-											<td>Added</td>
-											<td><?php echo ucfirst($product['creation_time'])?></td>
-										</tr>
-										<tr>
-											<td>City</td>
-											<td><?php echo ucfirst($product['location'])?></td>
-										</tr>
-										<tr>
-											<td>Brand</td>
-											<td><?php echo ucfirst($product['brand'])?></td>
-										</tr>
-										<tr>
-											<td>State</td>
-											<td><?php echo ucfirst($product['brand'])?></td>
-										</tr>
-                    <tr>
-											<td>Maximum lease Time</td>
-											<td><?php echo ucfirst($product['max_time'])?> Days</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-								<h3 class="tab-title">Product Review</h3>
-								<div class="product-review">
-									<div class="media">
-										<!-- Avater -->
-										<img src="images/user/user-thumb.jpg" alt="avater">
-										<div class="media-body">
-											<!-- Ratings -->
-											<div class="ratings">
-												<ul class="list-inline">
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-												</ul>
-											</div>
-											<div class="name">
-												<h5>Jessica Brown</h5>
-											</div>
-											<div class="date">
-												<p>Mar 20, 2018</p>
-											</div>
-											<div class="review-comment">
-												<p>
-													Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe laudant tota rem ape
-													riamipsa eaque.
-												</p>
-											</div>
-										</div>
-									</div>
-									<div class="review-submission">
-										<h3 class="tab-title">Submit your review</h3>
-										<!-- Rate -->
-										<div class="rate">
-											<div class="starrr"></div>
-										</div>
-										<div class="review-submit">
-											<form action="#" class="row">
-												<div class="col-lg-6">
-													<input type="text" name="name" id="name" class="form-control" placeholder="Name">
-												</div>
-												<div class="col-lg-6">
-													<input type="email" name="email" id="email" class="form-control" placeholder="Email">
-												</div>
-												<div class="col-12">
-													<textarea name="review" id="review" rows="10" class="form-control" placeholder="Message"></textarea>
-												</div>
-												<div class="col-12">
-													<button type="submit" class="btn btn-main">Sumbit</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
+			<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
 				<div class="sidebar">
-					<div class="widget price text-center">
-						<h4>Price</h4>
-						<p>$<?php echo $product['precio'] ?></p>
-					</div>
-					<!-- User Profile widget -->
-					<div class="widget user text-center">
-						<img class="rounded-circle img-fluid mb-5 px-5" src="images/user/<?php echo $product['avatar'] ?>" alt="">
-						<h4><a href="">
+					<!-- User Widget -->
+					<div class="widget user-dashboard-profile">
+						<!-- User Image -->
+						<div class="profile-thumb">
+							<img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+						</div>
+						<!-- User Name -->
+            <h5 class="text-center">
               <?php
-              echo ucfirst($product['fname']) .'  '.ucfirst($product['lname']);
+              echo ucfirst($personal['fname']);
+              echo ' ';
+              echo ucfirst($personal['lname'])
               ?>
-          </a></h4>
-						<ul class="list-inline mt-20">
-							<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3 ">Contact(not working)</a></del></li>
-
-              <li class="list-inline-item" >
-                <form method="POST" action="product.php?sells_id=<?php echo $product['sell_id'] ?>">
-                  <input type="hidden"  name="us_id" value="<?php echo $product['us_id'] ?>">
-                  <input type="hidden"  name="sell_id" value="<?php echo $product['sell_id'] ?>">
-                  <input type="submit" name="buy_product" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3"  value="Lease">
-                </form>
-
-              </li>
-						</ul>
+            </h5>
+						<a href="personalpage.php" class="btn btn-main-sm">Edit Profile</a>
 					</div>
-					<!-- Safety tips widget -->
-					<div class="widget disclaimer">
-						<h5 class="widget-header">Safety Tips</h5>
+					<!-- Dashboard Links -->
+					<div class="widget user-dashboard-menu">
 						<ul>
-							<li>Meet seller at a public place</li>
-							<li>Check the item before you buy</li>
-							<li>Pay only after collecting the item</li>
-							<li>Pay only after collecting the item</li>
+							<li class="active">
+                <a href="#"><i class="fa fa-user"></i> Users</a></li>
+							<li>
+								<a href="#"><i class="fa fa-bookmark-o"></i><del> Sells</del></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-file-archive-o"></i><del>Buyings</del></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-bolt"></i><del>Messages</del></a>
+							</li>
 						</ul>
 					</div>
+
+					<!-- delete-account modal -->
+											  <!-- delete account popup modal start-->
+                <!-- Modal -->
+                <div class="modal fade" id="deleteaccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header border-bottom-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body text-center">
+                        <img src="images/account/Account1.png" class="img-fluid mb-2" alt="">
+                        <h6 class="py-2">Are you sure you want to delete your account?</h6>
+                        <p>Do you really want to delete these records? This process cannot be undone.</p>
+                        <textarea name="message" id="" cols="40" rows="4" class="w-100 rounded"></textarea>
+                      </div>
+                      <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- delete account popup modal end-->
+					<!-- delete-account modal -->
 
 				</div>
 			</div>
+			<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+				<!-- Recently Favorited -->
+				<div class="widget dashboard-container my-adslist">
+          <ul class="nav justify-content-center" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
+               aria-selected="true">Product Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
+               aria-selected="false">Specifications</a>
+            </li>
+            <li class="nav-item">
+              <del><a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
+               aria-selected="false">Reviews</a></del>
+            </li>
+          </ul>
 
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+					<table class="table table-responsive product-dashboard-table">
+						<thead>
+							<tr>
+								<th>Avatar</th>
+								<th>Username</th>
+								<th class="text-center">Email</th>
+								<th class="text-center">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+
+                <?php if (mysqli_num_rows($result) > 0):?>
+                  <?php while($row = mysqli_fetch_assoc($result)):?>
+                    <tr>
+                      <td class="product-thumb">
+      									<img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
+      								<td class="product-details">
+      									<h3 class="title"><?php echo ucfirst($row['username'])?></h3>
+      								</td>
+      								<td class="product-category"><span class="categories"><?php echo ucfirst($row['email'])?></span></td>
+      								<td class="action" data-title="Action">
+      									<div class="">
+      										<ul class="list-inline justify-content-center">
+      											<li class="list-inline-item">
+      												<a data-toggle="tooltip" data-placement="top" title="Edit" class="edit" href="edit_user.php?username=<?php echo $row['username']?>">
+      													<i class="fa fa-pencil"></i>
+      												</a>
+      											</li>
+      											<li class="list-inline-item">
+                              <?php
+                                echo '<a href="server.php?del_user='.$row['username'].'" data-toggle="tooltip" data-placement="top" title="Delete" class="delete">';
+                              ?>
+      													<i class="fa fa-trash"></i>
+      												</a>
+      											</li>
+      										</ul>
+      									</div>
+      								</td>
+      							</tr>
+                  <?php endwhile ?>
+                <?php endif ?>
+
+
+
+						</tbody>
+					</table>
+
+          </div>
+          <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+            ciao
+          </div>
+
+          <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-home-tab">
+            ciao
+          </div>
+				</div>
+
+				<!-- pagination -->
+				<div class="pagination justify-content-center">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item">
+								<a class="page-link" href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item active"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<!-- pagination -->
+
+			</div>
 		</div>
+		<!-- Row End -->
 	</div>
 	<!-- Container End -->
 </section>
@@ -460,8 +414,6 @@
 </footer>
 
 <!-- JAVASCRIPTS -->
-
-
 <script src="plugins/jQuery/jquery.min.js"></script>
 <script src="plugins/bootstrap/js/popper.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -477,7 +429,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
 <script src="plugins/google-map/gmap.js"></script>
 <script src="js/script.js"></script>
-
 
 </body>
 

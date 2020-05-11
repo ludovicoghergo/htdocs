@@ -47,79 +47,80 @@
 
 <body class="body-wrapper">
 
-<section>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.png" alt="">
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item active">
-								<a class="nav-link" href="index.html">Home</a>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="category.php">Category<span><i class="fa fa-angle-down"></i></span>
-								</a>
+  <section>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-12">
+  				<nav class="navbar navbar-expand-lg navbar-light navigation">
+  					<a class="navbar-brand" href="index.php">
+  						<img src="images/logo_home.png" alt="">
+  					</a>
+  					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  						<span class="navbar-toggler-icon"></span>
+  					</button>
+  					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  						<ul class="navbar-nav ml-auto main-nav ">
+  							<li class="nav-item active">
+  								<a class="nav-link" href="index.php">Home</a>
+  							</li>
+  							<li class="nav-item dropdown dropdown-slide">
+                    <a class="nav-link dropdown-toggle"  href="category.php">Catalog<span></span>
+  								  </a>
+  							</li>
+  							<li class="nav-item dropdown dropdown-slide">
+                  <del>
+                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  									Pages <span><i class="fa fa-angle-down"></i></span>
+  								</a>
+                  </del>
+  								<!-- Dropdown list -->
+  								<div class="dropdown-menu">
+  									<a class="dropdown-item" href="about-us.html">About Us</a>
+  									<a class="dropdown-item" href="contact-us.html">Contact Us</a>
+  									<a class="dropdown-item" href="user-profile.html">User Profile</a>
+  									<a class="dropdown-item" href="404.html">404 Page</a>
+  									<a class="dropdown-item" href="package.html">Package</a>
+  									<a class="dropdown-item" href="single.html">Single Page</a>
+  									<a class="dropdown-item" href="store.html">Store Single</a>
+  									<a class="dropdown-item" href="single-blog.html">Single Post</a>
+  									<a class="dropdown-item" href="blog.html">Blog</a>
 
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
-									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
-									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
-									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
-									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="about-us.html">About Us</a>
-									<a class="dropdown-item" href="contact-us.html">Contact Us</a>
-									<a class="dropdown-item" href="user-profile.html">User Profile</a>
-									<a class="dropdown-item" href="404.html">404 Page</a>
-									<a class="dropdown-item" href="package.html">Package</a>
-									<a class="dropdown-item" href="single.html">Single Page</a>
-									<a class="dropdown-item" href="store.html">Store Single</a>
-									<a class="dropdown-item" href="single-blog.html">Single Post</a>
-									<a class="dropdown-item" href="blog.html">Blog</a>
-
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
-									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
-								</div>
-							</li>
-						</ul>
-						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="login.html">Login</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-white add-button" href="ad-listing.html"><i class="fa fa-plus-circle"></i> Add Listing</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
+  								</div>
+  							</li>
+  							<li class="nav-item dropdown dropdown-slide">
+                  <del>
+                  <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  									Listing <span><i class="fa fa-angle-down"></i></span>
+  								</a>
+                  </del>
+  								<!-- Dropdown list -->
+  								<div class="dropdown-menu">
+  									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
+  									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
+  								</div>
+  							</li>
+  						</ul>
+  						<ul class="navbar-nav ml-auto mt-10">
+                <?php  if (isset($_SESSION['username'])) : ?>
+                      <li class="nav-item">
+      								          <a class="nav-link login-button" href="personalpage.php"><?php echo ucfirst($_SESSION['username']); ?></a>
+      							  </li>
+                      <li class="nav-item">
+      								          <a class="nav-link login-button" href="logout.php">Logout</a>
+      							  </li>
+                <?php else : ?>
+                  <li class="nav-item">
+  								          <a class="nav-link login-button" href="login.php">Login</a>
+  							  </li>
+                <?php endif ?>
+  						</ul>
+  					</div>
+  				</nav>
+  			</div>
+  		</div>
+  	</div>
+  </section>
 <section class="page-search">
 	<div class="container">
 		<div class="row">
@@ -265,7 +266,7 @@
 					</div>
 				</div>
 				<div class="product-grid-list">
-					<div class="row mt-30">  
+					<div class="row mt-30">
 
             <?php if (mysqli_num_rows($allsells) > 0):?>
               <?php while($sell = mysqli_fetch_assoc($allsells)): ?>

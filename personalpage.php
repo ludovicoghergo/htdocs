@@ -62,19 +62,8 @@
   								<a class="nav-link" href="index.php">Home</a>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
-  								<del>
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
+                    <a class="nav-link dropdown-toggle"  href="category.php">Catalog<span></span>
   								  </a>
-                  </del>
-
-  								<!-- Dropdown list -->
-  								<div class="dropdown-menu">
-  									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
-  									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
-  									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
-  									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
-  									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
-  								</div>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
                   <del>
@@ -142,7 +131,7 @@
 					<div class="widget user">
 						<!-- User Image -->
 						<div class="image d-flex justify-content-center">
-							<img src="images/user/user-thumb.jpg" alt="" class="">
+							<img src="images/user/<?php echo $row['avatar'] ?>" alt="" class="">
 						</div>
 						<!-- User Name -->
 						<h5 class="text-center">
@@ -156,8 +145,8 @@
 					<!-- Dashboard Links -->
 					<div class="widget dashboard-links">
 						<ul>
-							<li><a class="my-1 d-inline-block disabled" href="new_sell.php">Nuova venta</a></li>
-							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="new_sell.php">New Sell</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="user_activities.php">My activities</a></li>
 							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
 							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
 						</ul>
@@ -186,13 +175,6 @@
 									<label for="last-name">Last Name</label>
 									<input type="text" class="form-control" name="lname" id="last-name" value="<?php echo ucfirst($row['lname'])?>">
 								</div>
-								<!--
-                File chooser
-								<div class="form-group choose-file d-inline-flex">
-									<i class="fa fa-user text-center px-3"></i>
-									<input type="file" class="form-control-file mt-2 pt-1" id="input-file">
-								 </div>
-                 -->
 								<!-- Comunity Name -->
 								<div class="form-group">
 									<label for="comunity-name">Comunity Name</label>
@@ -232,7 +214,7 @@
 						<!-- Change Email Address -->
 					<div class="widget change-email mb-0">
 						<h3 class="widget-header user">Edit Email Address</h3>
-						<form action="#">
+						<form method="post" action="personalpage.php">
 							<!-- Current Password -->
 							<div class="form-group">
 								<label for="current-email">Current Email</label>
@@ -244,7 +226,21 @@
 								<input type="email" name='new_email' class="form-control" id="new-email">
 							</div>
 							<!-- Submit Button -->
-							<button class="btn btn-transparent">Change email</button>
+							<button class="btn btn-transparent" type="submit" name="update_email">Change email</button>
+						</form>
+					</div>
+					</div>
+          <div class="col-lg-6 col-md-6">
+						<!-- Change Email Address -->
+					<div class="widget change-email mb-0">
+						<h3 class="widget-header user">Edit Profile's Avatar</h3>
+						<form method="post" action="personalpage.php" enctype="multipart/form-data">
+							<div class="form-group">
+								<label for="new-email">Choose file</label>
+								<input type="file" name='new_avatar' class="form-control" id="new_avatar">
+							</div>
+							<!-- Submit Button -->
+							<button class="btn btn-transparent" type="submit" name="update_avatar">Change Avatar</button>
 						</form>
 					</div>
 					</div>

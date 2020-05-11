@@ -149,6 +149,19 @@ if (isset($_POST['update_personal'])) {
   header('location: personalpage.php');
 }
 
+//UPDATE PERSONAL AVATAR
+if(isset($_POST['update_avatar'])){
+  $user = $_SESSION['username'];
+  $tmpFile = $_FILES['new_avatar']['tmp_name'];
+  $newFile = $_FILES['new_avatar']['name'];
+  move_uploaded_file($tmpFile, "./images/user/".$newFile);
+  $query = "UPDATE users SET avatar='$newFile' WHERE username ='$user'";
+  $result = mysqli_query($db,$query);
+  if ($result)
+    alertBox("Avatar Updated",1);
+  else
+    alertBox("Avatar Not Updated",0);
+}
 
 //UPDATE PERSONAL PASSWORD
 if (isset($_POST['update_passw'])) {
