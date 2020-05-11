@@ -265,7 +265,7 @@
 					</div>
 				</div>
 				<div class="product-grid-list">
-					<div class="row mt-30">
+					<div class="row mt-30">  
 
             <?php if (mysqli_num_rows($allsells) > 0):?>
               <?php while($sell = mysqli_fetch_assoc($allsells)): ?>
