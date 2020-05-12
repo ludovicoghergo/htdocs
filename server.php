@@ -420,6 +420,27 @@ function getSell($sell_id){
   return $result;
 }
 
+function getMySells(){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $username = $_SESSION['username'];
+  $id_user = getUserInfo($username);
+  $id_user = $id_user['ID'];
+  $sql = "SELECT * FROM sell as s inner JOIN users as u ON u.ID = s.id_user WHERE u.ID =$id_user";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getMyBuys(){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $username = $_SESSION['username'];
+  $id_user = getUserInfo($username);
+  $id_user = $id_user['ID'];
+  $sql = "SELECT * FROM sell as s INNER JOIN orders as o ON s.id = o.id_sell WHERE o.id_client = $id_user";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+
 function checkSession(){
   if (!isset($_SESSION['username'])){
      header('location: login_required.php');

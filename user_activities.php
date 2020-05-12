@@ -5,6 +5,8 @@
     $result = mysqli_query($db, $sql);
     $user = $_SESSION['username'];
     $personal = getUserInfo($user);
+    $mysells = getMySells();
+    $myBuys = getMyBuys();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -210,15 +212,15 @@
           <ul class="nav justify-content-center" id="pills-tab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
-               aria-selected="true">Product Details</a>
+               aria-selected="true">Orders</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
-               aria-selected="false">Specifications</a>
+               aria-selected="false">Sells</a>
             </li>
             <li class="nav-item">
               <del><a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
-               aria-selected="false">Reviews</a></del>
+               aria-selected="false">Messages</a></del>
             </li>
           </ul>
 
@@ -227,40 +229,37 @@
 					<table class="table table-responsive product-dashboard-table">
 						<thead>
 							<tr>
-								<th>Avatar</th>
-								<th>Username</th>
-								<th class="text-center">Email</th>
-								<th class="text-center">Action</th>
+								<th>Title</th>
+								<th>Category</th>
+								<th class="text-center">Precio</th>
+								<th class="text-center">Activated at</th>
+                <th class="text-center">State</th>
 							</tr>
 						</thead>
 						<tbody>
 
-                <?php if (mysqli_num_rows($result) > 0):?>
-                  <?php while($row = mysqli_fetch_assoc($result)):?>
+                <?php if (mysqli_num_rows($myBuys) > 0):?>
+                  <?php while($row = mysqli_fetch_assoc($myBuys)):?>
                     <tr>
                       <td class="product-thumb">
       									<img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
       								<td class="product-details">
-      									<h3 class="title"><?php echo ucfirst($row['username'])?></h3>
+      									<h3 class="title"><?php echo ucfirst($row['title'])?></h3>
       								</td>
-      								<td class="product-category"><span class="categories"><?php echo ucfirst($row['email'])?></span></td>
+      								<td class="product-category">
+                        <span class="categories">
+                        <?php echo ucfirst($row['category'])?>
+                      </span>
+                      </td>
       								<td class="action" data-title="Action">
-      									<div class="">
-      										<ul class="list-inline justify-content-center">
-      											<li class="list-inline-item">
-      												<a data-toggle="tooltip" data-placement="top" title="Edit" class="edit" href="edit_user.php?username=<?php echo $row['username']?>">
-      													<i class="fa fa-pencil"></i>
-      												</a>
-      											</li>
-      											<li class="list-inline-item">
-                              <?php
-                                echo '<a href="server.php?del_user='.$row['username'].'" data-toggle="tooltip" data-placement="top" title="Delete" class="delete">';
-                              ?>
-      													<i class="fa fa-trash"></i>
-      												</a>
-      											</li>
-      										</ul>
-      									</div>
+                        <span>
+      									<?php echo ucfirst($row['creation_time'])?>
+                      </span>
+      								</td>
+                      <td class="action" data-title="Action">
+                        <span>
+      									<?php echo ucfirst($row['state'])?>
+                      </span>
       								</td>
       							</tr>
                   <?php endwhile ?>
@@ -272,11 +271,11 @@
 					</table>
 
           </div>
-          <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             ciao
           </div>
 
-          <div class="tab-pane fade show active" id="pills-contact" role="tabpanel" aria-labelledby="pills-home-tab">
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
             ciao
           </div>
 				</div>
