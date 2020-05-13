@@ -440,6 +440,12 @@ function getMyBuys(){
   return $result;
 }
 
+function getTypeActivities(){
+  if (isset($_GET['type'])){
+    return $_GET['type'];
+  }
+  return 'orders';
+}
 
 function checkSession(){
   if (!isset($_SESSION['username'])){
