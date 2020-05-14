@@ -110,18 +110,27 @@ if (isset($_POST['login_user'])) {
   	}
   }
 }
-
+//DELETE USER FROM ADMIN
 if (isset($_GET['del_user'])) {
   $username = mysqli_real_escape_string($db, $_GET['del_user']);
   $query = "DELETE FROM users WHERE username='$username'";
   if(mysqli_query($db, $query)){
-    alertBox("Account Eliminated",);
+    alertBox("Account Eliminated",1);
     return;
   }else{
     alertBox("The account couldnt be eliminated",0);
     return;
   }
 }
+
+if (isset($_GET['end_sell'])) {
+  $title = mysqli_real_escape_string($db, $_GET['end_sell']);
+  $date = date("Y-m-d");
+  $query = "UPDATE sell as s,orders as o SET s.state = 'terminated', o.end_time = '$date', o.state ='terminated' WHERE title='$title' AND s.ID = o.id_sell";
+  mysqli_query($db, $query);
+  header('location: user_activities.php');
+}
+
 
 //UPDATE PERSONAL INFO
 if (isset($_POST['update_personal'])) {
@@ -420,22 +429,22 @@ function getSell($sell_id){
   return $result;
 }
 
-function getMySells(){
+function getMySells($index){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $username = $_SESSION['username'];
   $id_user = getUserInfo($username);
   $id_user = $id_user['ID'];
-  $sql = "SELECT * FROM sell as s inner JOIN users as u ON u.ID = s.id_user WHERE u.ID =$id_user";
+  $sql = "SELECT * FROM sell as s inner JOIN users as u ON u.ID = s.id_user WHERE u.ID =$id_user LIMIT 2 OFFSET $index ";
   $result = mysqli_query($db, $sql);
   return $result;
 }
 
-function getMyBuys(){
+function getMyBuys($index){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $username = $_SESSION['username'];
   $id_user = getUserInfo($username);
   $id_user = $id_user['ID'];
-  $sql = "SELECT * FROM sell as s INNER JOIN orders as o ON s.id = o.id_sell WHERE o.id_client = $id_user";
+  $sql = "SELECT * FROM sell as s INNER JOIN orders as o ON s.id = o.id_sell WHERE o.id_client = $id_user LIMIT 2 OFFSET $index ";
   $result = mysqli_query($db, $sql);
   return $result;
 }

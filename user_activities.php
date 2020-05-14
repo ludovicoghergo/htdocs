@@ -6,11 +6,14 @@
     $user = $_SESSION['username'];
     $type = getTypeActivities();
     $personal = getUserInfo($user);
+    if(isset($_GET['page']) && $_GET['page'] >= 0){
+      $page = $_GET['page'];
+    }else $page = 0;
     if($type == 'sells')
-      $result = getMySells();
+      $result = getMySells($page*2);
     else{
       $type = 'orders';
-      $result = getMyBuys();
+      $result = getMyBuys($page*2);
     }
 ?>
 <!DOCTYPE html>
@@ -152,7 +155,7 @@
 					<div class="widget user-dashboard-profile">
 						<!-- User Image -->
 						<div class="profile-thumb">
-							<img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+							<img src="images/user/<?php echo $personal['avatar']?>" alt="" class="rounded-circle">
 						</div>
 						<!-- User Name -->
             <h5 class="text-center">
@@ -228,6 +231,11 @@
 								<th class="text-center">Cost</th>
 								<th class="text-center">Activated at</th>
                 <th class="text-center">State</th>
+                <?php if($type == 'sells'):?>
+                <th class="text-center">Action</th>
+              <?php elseif($type == 'orders'):?>
+                <th class="text-center">End Time</th>
+                <?php endif ?>
 							</tr>
 						</thead>
 						<tbody>
@@ -235,10 +243,10 @@
                 <?php if (mysqli_num_rows($result) > 0):?>
                   <?php while($row = mysqli_fetch_assoc($result)):?>
                     <tr>
-      								<td class="product-details">
-      									<h3 class="title"><?php echo ucfirst($row['title'])?></h3>
+      								<td class="action" data-title="Action">
+      									<?php echo ucfirst($row['title'])?>
       								</td>
-      								<td class="product-category">
+      								<td class="action" data-title="Action">
                         <span class="categories">
                         <?php echo ucfirst($row['category'])?>
                       </span>
@@ -258,6 +266,27 @@
       									<?php echo ucfirst($row['state'])?>
                       </span>
       								</td>
+                      <?php if($type == 'sells'):?>
+                      <td class="action" data-title="Action">
+                        <span>
+                          <ul class="list-inline justify-content-center">
+      											<li class="list-inline-item">
+                              <?php
+                                echo '<a href="server.php?end_sell='.$row['title'].'" data-toggle="tooltip" data-placement="top" title="done" class="edit">';
+                              ?>
+      													<i class="fa fa-check"></i>
+      												</a>
+      											</li>
+      										</ul>
+                      </span>
+      								</td>
+                    <?php elseif($type == 'orders'):?>
+                        <td class="action" data-title="Action">
+                          <span>
+                            <?php echo ucfirst($row['end_time'])?>
+                          </span>
+                        </td>
+                    <?php endif?>
       							</tr>
                   <?php endwhile ?>
                 <?php endif ?>
@@ -272,16 +301,13 @@
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
 							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous">
+								<a class="page-link" href="user_activities.php?page=<?php echo($page - 1) ?>" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
 									<span class="sr-only">Previous</span>
 								</a>
 							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item active"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
 							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next">
+								<a class="page-link" href="user_activities.php?page=<?php echo($page + 1) ?>" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 									<span class="sr-only">Next</span>
 								</a>
