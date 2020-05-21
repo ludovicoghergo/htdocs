@@ -246,7 +246,7 @@
 							<select>
 								<option>Most Recent</option>
 								<option value="1">Most Popular</option>
-								<option value="2">Lowest Price</option>
+								<option value="2" onclick="pricesort()">order by price</option>
 								<option value="4">Highest Price</option>
 							</select>
 						</div>
@@ -428,6 +428,13 @@
 </footer>
 
 <!-- JAVASCRIPTS -->
+<script>
+function pricesort() {
+  
+}
+</script>
+
+
 <script src="plugins/jQuery/jquery.min.js"></script>
 <script src="plugins/bootstrap/js/popper.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>

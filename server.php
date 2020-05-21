@@ -463,4 +463,11 @@ function checkSession(){
   return;
 }
 
+function pricesort(){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell LIMIT 5 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
 ?>
