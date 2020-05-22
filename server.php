@@ -402,7 +402,7 @@ function getUserInfo($username){
 
 function getAllSells($index){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
-  $sql = "SELECT * FROM sell LIMIT 9 OFFSET $index ";
+  $sql = "SELECT * FROM sell ORDER BY creation_time DESC LIMIT 9 OFFSET $index ";
   $result = mysqli_query($db, $sql);
   return $result;
 }
@@ -463,9 +463,18 @@ function checkSession(){
   return;
 }
 
-function pricesort(){
+
+
+function getAllSellsSorted($index){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
-  $sql = "SELECT * FROM sell LIMIT 5 OFFSET $index ";
+  $sql = "SELECT * FROM sell ORDER BY precio LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllSellsSortedDesc($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell ORDER BY precio DESC LIMIT 9 OFFSET $index ";
   $result = mysqli_query($db, $sql);
   return $result;
 }
