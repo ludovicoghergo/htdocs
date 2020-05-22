@@ -327,7 +327,8 @@
               ?>
           </a></h4>
 						<ul class="list-inline mt-20">
-							<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3 ">Contact(not working)</a></del></li>
+              <li class="list-inline-item"><a href="message.php?subject_id=<?php echo $product['id_user']?>" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3 ">Contact</a></li>
+
 
               <li class="list-inline-item" >
                 <form method="POST" action="product.php?sells_id=<?php echo $product['sell_id'] ?>">

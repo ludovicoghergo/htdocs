@@ -389,6 +389,17 @@ function checkAdmin(){
  header('location: admin_required.php');
 }
 
+function getInfobyId($id){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM users WHERE ID ='$id' ";
+  $result = mysqli_query($db, $sql);
+  if (mysqli_num_rows($result) > 0){
+    $row = mysqli_fetch_assoc($result);
+    return $row;
+ }
+ return 0;
+}
+
 function getUserInfo($username){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $sql = "SELECT * FROM users WHERE username='$username'";
@@ -461,6 +472,23 @@ function checkSession(){
      header('location: login_required.php');
   }
   return;
+}
+
+if(isset($_POST['send_message'])){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $id_sender = mysqli_real_escape_string($db, $_POST['id_sender']);
+  $id_subject = mysqli_real_escape_string($db, $_POST['id_subject']);
+  $text = mysqli_real_escape_string($db, $_POST['message']);
+  $cat = mysqli_real_escape_string($db, $_POST['category']);
+  $send_time = date("Y-m-d H:i:s");
+  $query = "INSERT INTO messages (sender_id,receveir_id,description,send_time,category)
+        VALUES('$id_sender','$id_subject','$text', '$send_time','$cat')";
+  $result = mysqli_query($db, $query);
+  if($result){
+      alertBox("Sell inserted",1);
+  }else{
+      alertBox("Something didn't work out",0);
+  }
 }
 
 ?>

@@ -1,8 +1,9 @@
 <?php include('server.php') ?>
 <?php
-  $subject = $_GET['subject_username'];
-  $subject_info = getUserInfo($subject);
+  $subject = $_GET['subject_id'];
+  $subject_info = getInfobyId($subject);
   $user = $_SESSION['username'];
+  $sender_info = getUserInfo($user);
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,7 +148,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                    <form action="#">
+                    <form method="post" action="message.php?subject_id=<?php echo $subject  ?>">
                         <fieldset class="p-4">
                             <select name="category" id="" class="form-control w-100">
                                 <option value="">Select Category</option>
@@ -157,8 +158,10 @@
                                 <option value="Other">Other</option>
                             </select>
                             <textarea name="message" id=""  placeholder="Message *" class="border w-100 p-3 mt-3 mt-lg-4"></textarea>
+                            <input type="hidden" placeholder="Username" name="id_sender" value = "<?php echo $sender_info['ID'] ?>">
+                            <input type="hidden" placeholder="Username" name="id_subject" value = "<?php echo $subject_info['ID'] ?>">
                             <div class="btn-grounp">
-                                <button type="submit" class="btn btn-primary mt-2 float-right">SUBMIT</button>
+                                <button type="submit" name="send_message" class="btn btn-primary mt-2 float-right">SUBMIT</button>
                             </div>
                         </fieldset>
                     </form>
