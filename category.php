@@ -6,7 +6,7 @@
     $allsells = getAllSells($page*9);
     $categories = getAllCategories();
     $locations = getAllLocation();
- ?>
+     ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -243,12 +243,26 @@
 					<div class="row">
 						<div class="col-md-6">
 							<strong>Short</strong>
-							<select>
-								<option>Most Recent</option>
-								<option value="1">Most Popular</option>
-								<option value="2">Lowest Price</option>
-								<option value="4">Highest Price</option>
-							</select>
+              <form method=post>
+                   Filters 
+                  <select name="order" onchange="this.form.submit()">
+                  <option value="1">Most Recent</option>
+  								<option value="2">Order by price</option>
+  								<option value="3">Highest Price</option>
+  							</select>
+
+                <?php
+                   if(isset($_POST["order"])){
+                    $var = $_POST["order"];
+                    if($var == "2"){
+                      $allsells = getAllSellsSorted($page*9);
+                    }
+                    else if($var == "3"){
+                     $allsells = getAllSellsSortedDesc($page*9); 
+                    }
+                   }
+                ?>
+
 						</div>
 						<div class="col-md-6">
 							<div class="view">
