@@ -1,8 +1,21 @@
 <?php include('server.php') ?>
 <?php
-  $user = $_SESSION['username'];
-  $row = getUserInfo($user);
- ?>
+    checkSession();
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($db, $sql);
+    $user = $_SESSION['username'];
+    $type = getTypeMessage();
+    $personal = getUserInfo($user);
+    if(isset($_GET['page']) && $_GET['page'] >= 0){
+      $page = $_GET['page'];
+    }else $page = 0;
+    if($type == 'sells')
+      $result = getMySentMessages($page*2);
+    else{
+      $type = 'orders';
+      $result = getMyReceivedMessages($page*2);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +56,6 @@
 
 <body class="body-wrapper">
 
-
   <section>
   	<div class="container">
   		<div class="row">
@@ -62,8 +74,19 @@
   								<a class="nav-link" href="index.php">Home</a>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
-                    <a class="nav-link dropdown-toggle"  href="category.php">Catalog<span></span>
+  								<del>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
   								  </a>
+                  </del>
+
+  								<!-- Dropdown list -->
+  								<div class="dropdown-menu">
+  									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
+  									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
+  									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
+  									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
+  									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
+  								</div>
   							</li>
   							<li class="nav-item dropdown dropdown-slide">
                   <del>
@@ -121,135 +144,151 @@
 <!--==================================
 =            User Profile            =
 ===================================-->
-
-<section class="user-profile section">
+<section class="dashboard section">
+	<!-- Container Start -->
 	<div class="container">
+		<!-- Row Start -->
 		<div class="row">
-			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+			<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
 				<div class="sidebar">
 					<!-- User Widget -->
-					<div class="widget user">
+					<div class="widget user-dashboard-profile">
 						<!-- User Image -->
-						<div class="image d-flex justify-content-center">
-							<img src="images/user/<?php echo $row['avatar'] ?>" alt="" class="">
+						<div class="profile-thumb">
+							<img src="images/user/<?php echo $personal['avatar']?>" alt="" class="rounded-circle">
 						</div>
 						<!-- User Name -->
-						<h5 class="text-center">
+            <h5 class="text-center">
               <?php
-              echo ucfirst($row['fname']);
+              echo ucfirst($personal['fname']);
               echo ' ';
-              echo ucfirst($row['lname'])
+              echo ucfirst($personal['lname'])
               ?>
             </h5>
 					</div>
 					<!-- Dashboard Links -->
-					<div class="widget dashboard-links">
+					<div class="widget user-dashboard-menu">
 						<ul>
-							<li><a class="my-1 d-inline-block disabled" href="new_sell.php">New Sell</a></li>
-							<li><a class="my-1 d-inline-block disabled" href="user_activities.php">My activities</a></li>
-							<li><a class="my-1 d-inline-block disabled" href="user_messages.php">Messages</a></li>
-							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+							<li>
+                <a href="user_activities.php?type=orders"><i class="fa fa-user"></i> Sent Messages</a></li>
+							<li>
+								<a href="user_activities.php?type=sells"><i class="fa fa-bookmark-o"></i> Received Messages</a>
+							</li>
 						</ul>
 					</div>
+
+					<!-- delete-account modal -->
+											  <!-- delete account popup modal start-->
+                <!-- Modal -->
+                <div class="modal fade" id="deleteaccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header border-bottom-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body text-center">
+                        <img src="images/account/Account1.png" class="img-fluid mb-2" alt="">
+                        <h6 class="py-2">Are you sure you want to delete your account?</h6>
+                        <p>Do you really want to delete these records? This process cannot be undone.</p>
+                        <textarea name="message" id="" cols="40" rows="4" class="w-100 rounded"></textarea>
+                      </div>
+                      <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- delete account popup modal end-->
+					<!-- delete-account modal -->
+
 				</div>
 			</div>
-			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
-				<!-- Edit Profile Welcome Text -->
-				<div class="widget welcome-message">
-					<h2>Edit profile</h2>
-					<p>Edit your personal info here</p>
+			<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+				<!-- Recently Favorited -->
+				<div class="widget dashboard-container my-adslist">
+          <div class="text-center table-title">
+          <h2>
+              My <?php echo ucfirst($type)  ?>
+          </h2>
+          </div>
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+					<table class="table table-responsive product-dashboard-table">
+						<thead>
+							<tr>
+								<th>Sender</th>
+								<th>Receiver</th>
+								<th class="text-center">Category</th>
+								<th class="text-center">Text</th>
+                <th class="text-center">Date</th>
+							</tr>
+						</thead>
+						<tbody>
+
+                <?php if (mysqli_num_rows($result) > 0):?>
+                  <?php while($row = mysqli_fetch_assoc($result)):?>
+                    <tr>
+      								<td class="action" data-title="Action">
+      									<?php echo ucfirst($row['sender_name'])?>
+      								</td>
+      								<td class="action" data-title="Action">
+                        <span class="categories">
+                        <?php echo ucfirst($row['receiver_name'])?>
+                      </span>
+                      </td>
+                      <td class="action" data-title="Action">
+                        <span>
+      									<?php echo ucfirst($row['category'])?>
+                      </span>
+      								</td>
+      								<td class="action" data-title="Action">
+                        <span>
+      									<?php echo ucfirst($row['description'])?>
+                      </span>
+      								</td>
+                      <td class="action" data-title="Action">
+                        <span>
+      									<?php echo ucfirst($row['send_time'])?>
+                      </span>
+      								</td>
+                    <?php endwhile ?>
+                    <?php endif ?>
+						</tbody>
+					</table>
+
 				</div>
-				<!-- Edit Personal Info -->
-				<div class="row">
-					<div class="col-lg-6 col-md-6">
-						<div class="widget personal-info">
-							<h3 class="widget-header user">Edit Personal Information</h3>
-							<form method="post" action="personalpage.php">
-								<!-- First Name -->
-								<div class="form-group">
-									<label for="first-name">First Name</label>
-                  <input type="text" class="form-control" name="fname"  id="first-name" value="<?php echo ucfirst($row['fname'])?>">
-								</div>
-								<!-- Last Name -->
-								<div class="form-group">
-									<label for="last-name">Last Name</label>
-									<input type="text" class="form-control" name="lname" id="last-name" value="<?php echo ucfirst($row['lname'])?>">
-								</div>
-								<!-- Comunity Name -->
-								<div class="form-group">
-									<label for="comunity-name">Comunity Name</label>
-									<input type="text" name="username" class="form-control" id="comunity-name" value="<?php echo ucfirst($row['username'])?>">
-								</div>
-								<!-- Submit button -->
-								<button class="btn btn-transparent"  type="submit" name="update_personal">Save My Changes</button>
-							</form>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6">
-						<!-- Change Password -->
-					<div class="widget change-password">
-						<h3 class="widget-header user">Edit Password</h3>
-						<form method="post" action="personalpage.php">
-							<!-- Current Password -->
-							<div class="form-group">
-								<label for="current-password">Current Password</label>
-								<input type="password" name="old_passw" class="form-control" id="current-password">
-							</div>
-							<!-- New Password -->
-							<div class="form-group">
-								<label for="new-password">New Password</label>
-								<input type="password" name="new_pass1" class="form-control" id="new-password">
-							</div>
-							<!-- Confirm New Password -->
-							<div class="form-group">
-								<label for="confirm-password">Confirm New Password</label>
-								<input type="password" name="new_pass2" class="form-control" id="confirm-password">
-							</div>
-							<!-- Submit Button -->
-							<button class="btn btn-transparent" type="submit" name="update_passw">Change Password</button>
-						</form>
-					</div>
-					</div>
-					<div class="col-lg-6 col-md-6">
-						<!-- Change Email Address -->
-					<div class="widget change-email mb-0">
-						<h3 class="widget-header user">Edit Email Address</h3>
-						<form method="post" action="personalpage.php">
-							<!-- Current Password -->
-							<div class="form-group">
-								<label for="current-email">Current Email</label>
-								<input type="email" name='old_email' class="form-control" id="current-email">
-							</div>
-							<!-- New email -->
-							<div class="form-group">
-								<label for="new-email">New email</label>
-								<input type="email" name='new_email' class="form-control" id="new-email">
-							</div>
-							<!-- Submit Button -->
-							<button class="btn btn-transparent" type="submit" name="update_email">Change email</button>
-						</form>
-					</div>
-					</div>
-          <div class="col-lg-6 col-md-6">
-						<!-- Change Email Address -->
-					<div class="widget change-email mb-0">
-						<h3 class="widget-header user">Edit Profile's Avatar</h3>
-						<form method="post" action="personalpage.php" enctype="multipart/form-data">
-							<div class="form-group">
-								<label for="new-email">Choose file</label>
-								<input type="file" name='new_avatar' class="form-control" id="new_avatar">
-							</div>
-							<!-- Submit Button -->
-							<button class="btn btn-transparent" type="submit" name="update_avatar">Change Avatar</button>
-						</form>
-					</div>
-					</div>
+
+				<!-- pagination -->
+				<div class="pagination justify-content-center">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item">
+								<a class="page-link" href="user_activities.php?page=<?php echo($page - 1) ?>" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							<li class="page-item">
+								<a class="page-link" href="user_activities.php?page=<?php echo($page + 1) ?>" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
 				</div>
+				<!-- pagination -->
+
 			</div>
 		</div>
+		<!-- Row End -->
 	</div>
+	<!-- Container End -->
 </section>
-
 <!--============================
 =            Footer            =
 =============================-->

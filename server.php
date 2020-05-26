@@ -474,6 +474,33 @@ function checkSession(){
   return;
 }
 
+function getTypeMessage(){
+  if (isset($_GET['type'])){
+    return $_GET['type'];
+  }
+  return 'sent';
+}
+
+function getMySentMessages($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $username = $_SESSION['username'];
+  $id_user = getUserInfo($username);
+  $id_user = $id_user['ID'];
+  $sql = "SELECT *,u1.username as sender_name,u2.username as receiver_name FROM messages as m inner JOIN users as u1 ON u1.ID = m.sender_id INNER JOIN users as u2 ON u2.id = m.receveir_id WHERE u1.ID =$id_user LIMIT 2 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getMyReceivedMessages($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $username = $_SESSION['username'];
+  $id_user = getUserInfo($username);
+  $id_user = $id_user['ID'];
+  $sql = "SELECT *, u1.username as sender_name,u2.username as receiver_name FROM messages as m inner JOIN users as u1 ON u1.ID = m.sender_id INNER JOIN users as u2 ON u2.id = m.receveir_id WHERE u2.ID =$id_user LIMIT 2 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
 if(isset($_POST['send_message'])){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $id_sender = mysqli_real_escape_string($db, $_POST['id_sender']);
