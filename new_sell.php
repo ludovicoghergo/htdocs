@@ -173,7 +173,17 @@
 								<!-- Last Name -->
 								<div class="form-group">
 									<label for="last-name">Category</label>
-									<input type="text" class="form-control" name="category" id="last-name">
+                  <select name="category" id="" class="form-control w-100">
+                      <option value="">Select Category</option>
+                      <option value="Car">Car</option>
+                      <option value="Home">House</option>
+                      <option value="Sport">Sport</option>
+                      <option value="Outside">Outside</option>
+                      <option value="Health">Health</option>
+                      <option value="Dress">Dress</option>
+                      <option value="IT">IT</option>
+                      <option value="Other">Outside</option>
+                  </select>
 								</div>
                 <div class="form-group">
 									<label for="last-name">Description</label>

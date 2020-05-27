@@ -9,10 +9,10 @@
     if(isset($_GET['page']) && $_GET['page'] >= 0){
       $page = $_GET['page'];
     }else $page = 0;
-    if($type == 'sells')
+    if($type == 'sent')
       $result = getMySentMessages($page*2);
     else{
-      $type = 'orders';
+      $type = 'received';
       $result = getMyReceivedMessages($page*2);
     }
 ?>
@@ -170,9 +170,9 @@
 					<div class="widget user-dashboard-menu">
 						<ul>
 							<li>
-                <a href="user_activities.php?type=orders"><i class="fa fa-user"></i> Sent Messages</a></li>
+                <a href="user_messages.php?type=sent"><i class="fa fa-paper-plane"></i> Sent Messages</a></li>
 							<li>
-								<a href="user_activities.php?type=sells"><i class="fa fa-bookmark-o"></i> Received Messages</a>
+								<a href="user_messages.php?type=received"><i class="fa fa-envelope"></i> Received Messages</a>
 							</li>
 						</ul>
 					</div>
@@ -212,7 +212,7 @@
 				<div class="widget dashboard-container my-adslist">
           <div class="text-center table-title">
           <h2>
-              My <?php echo ucfirst($type)  ?>
+              My <?php echo ucfirst($type)  ?> Messages
           </h2>
           </div>
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -220,8 +220,8 @@
 					<table class="table table-responsive product-dashboard-table">
 						<thead>
 							<tr>
-								<th>Sender</th>
-								<th>Receiver</th>
+								<th class="text-center">Sender</th>
+								<th class="text-center">Receiver</th>
 								<th class="text-center">Category</th>
 								<th class="text-center">Text</th>
                 <th class="text-center">Date</th>
@@ -266,18 +266,33 @@
 				<div class="pagination justify-content-center">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
+              <?php if($type == 'sent'): ?>
 							<li class="page-item">
-								<a class="page-link" href="user_activities.php?page=<?php echo($page - 1) ?>" aria-label="Previous">
+								<a class="page-link" href="user_messages.php?page=<?php echo($page - 1) ?>&type=sent" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
 									<span class="sr-only">Previous</span>
 								</a>
 							</li>
 							<li class="page-item">
-								<a class="page-link" href="user_activities.php?page=<?php echo($page + 1) ?>" aria-label="Next">
+								<a class="page-link" href="user_messages.php?page=<?php echo($page + 1) ?>&type=sent" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 									<span class="sr-only">Next</span>
 								</a>
 							</li>
+            <?php else: ?>
+              <li class="page-item">
+								<a class="page-link" href="user_messages.php?page=<?php echo($page - 1) ?>&type=received" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							<li class="page-item">
+								<a class="page-link" href="user_messages.php?page=<?php echo($page + 1) ?>&type=received" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+            <?php endif ?>
 						</ul>
 					</nav>
 				</div>

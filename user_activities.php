@@ -174,12 +174,6 @@
 							<li>
 								<a href="user_activities.php?type=sells"><i class="fa fa-bookmark-o"></i> Sells</a>
 							</li>
-							<li>
-								<a href="#"><i class="fa fa-file-archive-o"></i><del>Buyings</del></a>
-							</li>
-							<li>
-								<a href="#"><i class="fa fa-bolt"></i><del>Messages</del></a>
-							</li>
 						</ul>
 					</div>
 
@@ -300,18 +294,33 @@
 				<div class="pagination justify-content-center">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
+              <?php if($type == 'sell'): ?>
 							<li class="page-item">
-								<a class="page-link" href="user_activities.php?page=<?php echo($page - 1) ?>" aria-label="Previous">
+								<a class="page-link" href="user_activities.php?page=<?php echo($page - 1) ?>&type=sells" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
 									<span class="sr-only">Previous</span>
 								</a>
 							</li>
 							<li class="page-item">
-								<a class="page-link" href="user_activities.php?page=<?php echo($page + 1) ?>" aria-label="Next">
+								<a class="page-link" href="user_activities.php?page=<?php echo($page + 1) ?>&type=sells" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 									<span class="sr-only">Next</span>
 								</a>
 							</li>
+            <?php else: ?>
+              <li class="page-item">
+								<a class="page-link" href="user_activities.php?page=<?php echo($page - 1) ?>&type=orders" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							<li class="page-item">
+								<a class="page-link" href="user_activities.php?page=<?php echo($page + 1) ?>&type=orders" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+            <?php endif ?>
 						</ul>
 					</nav>
 				</div>

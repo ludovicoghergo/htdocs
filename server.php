@@ -518,4 +518,14 @@ if(isset($_POST['send_message'])){
   }
 }
 
+function  increaseView($sellid){
+    $db = mysqli_connect('localhost', 'root', '', 'mda');
+    $sql = "SELECT views from sell  WHERE ID =$sellid ";
+    $result = mysqli_query($db, $sql);
+    $product = mysqli_fetch_assoc($result);
+    $new_views = $product['views'] + 1;
+    $sql = "UPDATE sell SET views = $new_views WHERE ID =$sellid";
+    $result = mysqli_query($db, $sql);
+  }
+
 ?>

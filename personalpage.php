@@ -145,10 +145,9 @@
 					<!-- Dashboard Links -->
 					<div class="widget dashboard-links">
 						<ul>
-							<li><a class="my-1 d-inline-block disabled" href="new_sell.php">New Sell</a></li>
-							<li><a class="my-1 d-inline-block disabled" href="user_activities.php">My activities</a></li>
-							<li><a class="my-1 d-inline-block disabled" href="user_messages.php">Messages</a></li>
-							<li><a class="my-1 d-inline-block disabled" href="">OFF</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="new_sell.php"><i class="fa fa-gavel" aria-hidden="true"></i> New Sell</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="user_activities.php"><i class="fa fa-exchange" aria-hidden="true"></i> My activities</a></li>
+							<li><a class="my-1 d-inline-block disabled" href="user_messages.php"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a></li>
 						</ul>
 					</div>
 				</div>

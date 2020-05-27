@@ -3,6 +3,7 @@
   if(isset($_GET['sells_id'])){
     $sell_id = $_GET['sells_id'];
   }else header('404.html');
+  increaseView($sell_id);
   $sell  = getSell($sell_id);
    if (mysqli_num_rows($sell) > 0)
     $product = mysqli_fetch_assoc($sell);
