@@ -474,6 +474,57 @@ function checkSession(){
   return;
 }
 
+
+function getAllSellsSorted($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell ORDER BY precio LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllSellsSortedDesc($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell ORDER BY precio DESC LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllSellsByArea($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell ORDER BY location LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllSellsNapuli($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell WHERE location = 'Napuli' LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllSellsTorino($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell WHERE location = 'Torino' LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllSellsPalermo($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell WHERE location = 'Palermo' LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getAllSellsMilano($index){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell WHERE location = 'Milano' LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+
 function getTypeMessage(){
   if (isset($_GET['type'])){
     return $_GET['type'];
@@ -527,5 +578,6 @@ function  increaseView($sellid){
     $sql = "UPDATE sell SET views = $new_views WHERE ID =$sellid";
     $result = mysqli_query($db, $sql);
   }
+
 
 ?>

@@ -48,239 +48,277 @@
 <body class="body-wrapper">
 
   <section>
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-md-12">
-  				<nav class="navbar navbar-expand-lg navbar-light navigation">
-  					<a class="navbar-brand" href="index.php">
-  						<img src="images/logo_home.png" alt="">
-  					</a>
-  					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-  					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  						<span class="navbar-toggler-icon"></span>
-  					</button>
-  					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-  						<ul class="navbar-nav ml-auto main-nav ">
-  							<li class="nav-item active">
-  								<a class="nav-link" href="index.php">Home</a>
-  							</li>
-  							<li class="nav-item dropdown dropdown-slide">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-expand-lg navbar-light navigation">
+            <a class="navbar-brand" href="index.php">
+              <img src="images/logo_home.png" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto main-nav ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.php">Home</a>
+                </li>
+                <li class="nav-item dropdown dropdown-slide">
                     <a class="nav-link dropdown-toggle"  href="category.php">Catalog<span></span>
-  								  </a>
-  							</li>
-  							<li class="nav-item dropdown dropdown-slide">
+                    </a>
+                </li>
+                <li class="nav-item dropdown dropdown-slide">
                   <del>
                   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  									Pages <span><i class="fa fa-angle-down"></i></span>
-  								</a>
+                    Pages <span><i class="fa fa-angle-down"></i></span>
+                  </a>
                   </del>
-  								<!-- Dropdown list -->
-  								<div class="dropdown-menu">
-  									<a class="dropdown-item" href="about-us.html">About Us</a>
-  									<a class="dropdown-item" href="contact-us.html">Contact Us</a>
-  									<a class="dropdown-item" href="user-profile.html">User Profile</a>
-  									<a class="dropdown-item" href="404.html">404 Page</a>
-  									<a class="dropdown-item" href="package.html">Package</a>
-  									<a class="dropdown-item" href="single.html">Single Page</a>
-  									<a class="dropdown-item" href="store.html">Store Single</a>
-  									<a class="dropdown-item" href="single-blog.html">Single Post</a>
-  									<a class="dropdown-item" href="blog.html">Blog</a>
+                  <!-- Dropdown list -->
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="about-us.html">About Us</a>
+                    <a class="dropdown-item" href="contact-us.html">Contact Us</a>
+                    <a class="dropdown-item" href="user-profile.html">User Profile</a>
+                    <a class="dropdown-item" href="404.html">404 Page</a>
+                    <a class="dropdown-item" href="package.html">Package</a>
+                    <a class="dropdown-item" href="single.html">Single Page</a>
+                    <a class="dropdown-item" href="store.html">Store Single</a>
+                    <a class="dropdown-item" href="single-blog.html">Single Post</a>
+                    <a class="dropdown-item" href="blog.html">Blog</a>
 
-  								</div>
-  							</li>
-  							<li class="nav-item dropdown dropdown-slide">
+                  </div>
+                </li>
+                <li class="nav-item dropdown dropdown-slide">
                   <del>
                   <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  									Listing <span><i class="fa fa-angle-down"></i></span>
-  								</a>
+                    Listing <span><i class="fa fa-angle-down"></i></span>
+                  </a>
                   </del>
-  								<!-- Dropdown list -->
-  								<div class="dropdown-menu">
-  									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
-  									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
-  								</div>
-  							</li>
-  						</ul>
-  						<ul class="navbar-nav ml-auto mt-10">
+                  <!-- Dropdown list -->
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="category.html">Ad-Gird View</a>
+                    <a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
+                  </div>
+                </li>
+              </ul>
+              <ul class="navbar-nav ml-auto mt-10">
                 <?php  if (isset($_SESSION['username'])) : ?>
                       <li class="nav-item">
-      								          <a class="nav-link login-button" href="personalpage.php"><?php echo ucfirst($_SESSION['username']); ?></a>
-      							  </li>
+                                <a class="nav-link login-button" href="personalpage.php"><?php echo ucfirst($_SESSION['username']); ?></a>
+                      </li>
                       <li class="nav-item">
-      								          <a class="nav-link login-button" href="logout.php">Logout</a>
-      							  </li>
+                                <a class="nav-link login-button" href="logout.php">Logout</a>
+                      </li>
                 <?php else : ?>
                   <li class="nav-item">
-  								          <a class="nav-link login-button" href="login.php">Login</a>
-  							  </li>
+                            <a class="nav-link login-button" href="login.php">Login</a>
+                  </li>
                 <?php endif ?>
-  						</ul>
-  					</div>
-  				</nav>
-  			</div>
-  		</div>
-  	</div>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
   </section>
 <section class="page-search">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Advance Search -->
-				<div class="advance-search">
-					<form>
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
-							</div>
-							<div class="form-group col-md-3">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
-							</div>
-							<div class="form-group col-md-3">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
-							</div>
-							<div class="form-group col-md-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Advance Search -->
+        <div class="advance-search">
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
+              </div>
+              <div class="form-group col-md-3">
+                <input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
+              </div>
+              <div class="form-group col-md-3">
+                <input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
+              </div>
+              <div class="form-group col-md-2">
 
-								<button type="submit" class="btn btn-primary">Search Now</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+                <button type="submit" class="btn btn-primary">Search Now</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <section class="section-sm">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="search-result bg-gray">
-					<h2>Catalog</h2>
-					<?php
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="search-result bg-gray">
+          <h2>Catalog</h2>
+          <?php
             $number_results = mysqli_num_rows($allsells);
             echo "$number_results articles on sale";
           ?>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<div class="category-sidebar">
-					<div class="widget category-list">
-	<h4 class="widget-header">Top Categories</h4>
-	<ul class="category-list">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="category-sidebar">
+          <div class="widget category-list">
+  <h4 class="widget-header">Top Categories</h4>
+  <ul class="category-list">
     <?php if (mysqli_num_rows($categories) > 0):?>
       <?php while($cat = mysqli_fetch_assoc($categories)): ?>
         <li><a href="#"><?php echo $cat['category'] ?></a></li>
       <?php endwhile ?>
     <?php endif ?>
-	</ul>
+  </ul>
 </div>
 
 <div class="widget category-list">
-	<h4 class="widget-header">Areas</h4>
-	<ul class="category-list">
+  <h4 class="widget-header">Areas</h4>
+  <ul class="category-list">
     <?php if (mysqli_num_rows($locations) > 0):?>
       <?php while ($loc = mysqli_fetch_assoc($locations)): ?>
         <li><a href="#"><?php echo $loc['location'] ?></a></li>
       <?php endwhile ?>
     <?php endif ?>
-	</ul>
+  </ul>
 </div>
 
 <div class="widget filter">
-	<h4 class="widget-header">Show Produts</h4>
-	<select>
-		<option>Popularity</option>
-		<option value="1">Top rated</option>
-		<option value="2">Lowest Price</option>
-		<option value="4">Highest Price</option>
-	</select>
+  <h4 class="widget-header">Show Produts</h4>
+  <select>
+    <option>Popularity</option>
+    <option value="1">Top rated</option>
+    <option value="2">Lowest Price</option>
+    <option value="4">Highest Price</option>
+  </select>
 </div>
 
 <div class="widget price-range w-100">
-	<h4 class="widget-header">Price Range</h4>
-	<div class="block">
-						<input class="range-track w-100" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="5"
-						data-slider-value="[0,5000]">
-				<div class="d-flex justify-content-between mt-2">
-						<span class="value">$10 - $5000</span>
-				</div>
-	</div>
+  <h4 class="widget-header">Price Range</h4>
+  <div class="block">
+            <input class="range-track w-100" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="5"
+            data-slider-value="[0,5000]">
+        <div class="d-flex justify-content-between mt-2">
+            <span class="value">$10 - $5000</span>
+        </div>
+  </div>
 </div>
 
 <div class="widget product-shorting">
-	<h4 class="widget-header">By Condition</h4>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Brand New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Almost New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Gently New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Havely New
-	  </label>
-	</div>
+  <h4 class="widget-header">By Condition</h4>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" value="">
+      Brand New
+    </label>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" value="">
+      Almost New
+    </label>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" value="">
+      Gently New
+    </label>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" value="">
+      Havely New
+    </label>
+  </div>
 </div>
 
-				</div>
-			</div>
-			<div class="col-md-9">
-				<div class="category-search-filter">
-					<div class="row">
-						<div class="col-md-6">
-							<strong>Short</strong>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="category-search-filter">
+          <div class="row">
+            <div class="col-md-6">
               <form method=post>
                    Filters 
                   <select name="order" onchange="this.form.submit()">
+                  <option value="" disabled selected>Choose a filter</option>
                   <option value="1">Most Recent</option>
-  								<option value="2">Order by price</option>
-  								<option value="3">Highest Price</option>
-  							</select>
+                  <option value="2">Order by price</option>
+                  <option value="3">Highest Price</option>
+                  <option value="4">Order By Area</option>
+                </select>
 
                 <?php
                    if(isset($_POST["order"])){
                     $var = $_POST["order"];
-                    if($var == "2"){
+                    if($var == "1"){
+                      $allsells = getAllSells($page*9);
+                    }
+                    else if($var == "2"){
                       $allsells = getAllSellsSorted($page*9);
                     }
                     else if($var == "3"){
                      $allsells = getAllSellsSortedDesc($page*9); 
                     }
+                    else if($var == "4"){
+                     $allsells = getAllSellsByArea($page*9); 
+                    }
                    }
                 ?>
 
-						</div>
-						<div class="col-md-6">
-							<div class="view">
-								<strong>Views</strong>
-								<ul class="list-inline view-switcher">
-									<li class="list-inline-item">
-										<a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
-									</li>
-									<li class="list-inline-item">
-										<a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="product-grid-list">
-					<div class="row mt-30">
+                <form method=post>
+                   Select area 
+                  <select name="area" onchange="this.form.submit()">
+                  <option value="0">Areas</option>
+                  <option value="1">Napuli</option>
+                  <option value="2">Torino</option>
+                  <option value="3">Palermo</option>
+                  <option value="4">Milano</option>
+                </select>
+
+                <?php
+                   if(isset($_POST["area"])){
+                    $var = $_POST["area"];
+                    if($var == "0"){
+                      $allsells = getAllSells($page*9);
+                    }
+                    else if($var == "1"){
+                      $allsells = getAllSellsNapuli($page*9);
+                    }
+                    else if($var == "2"){
+                     $allsells = getAllSellsTorino($page*9); 
+                    }
+                    else if($var == "3"){
+                     $allsells = getAllSellsPalermo($page*9); 
+                    }
+                    else if($var == "4"){
+                     $allsells = getAllSellsMilano($page*9); 
+                    }
+                   }
+                ?>
+
+            </div>
+            <div class="col-md-6">
+              <div class="view">
+                <strong>Views</strong>
+                <ul class="list-inline view-switcher">
+                  <li class="list-inline-item">
+                    <a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-grid-list">
+          <div class="row mt-30">
 
             <?php if (mysqli_num_rows($allsells) > 0):?>
               <?php while($sell = mysqli_fetch_assoc($allsells)): ?>
@@ -296,10 +334,16 @@
                         <h4 class="card-title"><a href="product.php?sells_id=<?php echo $sell['ID']  ?>"><?php echo $sell['title'] ?></a></h4>
                         <ul class="list-inline product-meta">
                           <li class="list-inline-item">
-                            <a href="single.html"><i class="fa fa-folder-open-o"></i><?php echo $sell['category'] ?></a>
+                            <a href="single.html"><?php echo $sell['precio']."$" ?></a>
                           </li>
                           <li class="list-inline-item">
                             <a href="#"><i class="fa fa-calendar"></i><?php echo $sell['creation_time'] ?></a>
+                          </li>
+                          <li class="list-inline-item">
+                            <a href="single.html"><i class="fa fa-folder-open-o"></i><?php echo $sell['category'] ?></a>
+                          </li>
+                          <li class="list-inline-item">
+                            <a href="single.html"><?php echo "Area of ".$sell['location']; ?></a>
                           </li>
                         </ul>
                         <p class="card-text"><?php echo $sell['description'] ?></p>
@@ -309,35 +353,35 @@
                 </div>
               <?php endwhile ?>
             <?php endif ?>
-					</div>
-				</div>
-				<div class="pagination justify-content-center">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
+          </div>
+        </div>
+        <div class="pagination justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
 
-							<li class="page-item">
-								<a class="page-link" href= 'category.php?page=<?php echo ($page - 1) ?>'aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-								</a>
-							</li>
+              <li class="page-item">
+                <a class="page-link" href= 'category.php?page=<?php echo ($page - 1) ?>'aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
 
-							<li class="page-item"><a class="page-link" href="#"><?php echo ($page+1) ?></a></li>
-							<li class="page-item "><a class="page-link" href="#"><?php echo ($page+2) ?></a></li>
-							<li class="page-item"><a class="page-link" href="#"><?php echo ($page+3) ?></a></li>
-							<li class="page-item">
-								<a class="page-link" href='category.php?page=<?php echo ($page + 1) ?>' aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								</a>
-							</li>
+              <li class="page-item"><a class="page-link" href="#"><?php echo ($page+1) ?></a></li>
+              <li class="page-item "><a class="page-link" href="#"><?php echo ($page+2) ?></a></li>
+              <li class="page-item"><a class="page-link" href="#"><?php echo ($page+3) ?></a></li>
+              <li class="page-item">
+                <a class="page-link" href='category.php?page=<?php echo ($page + 1) ?>' aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
 
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <!--============================
 =            Footer            =
