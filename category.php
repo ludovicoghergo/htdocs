@@ -168,9 +168,20 @@
           <div class="widget category-list">
   <h4 class="widget-header">Top Categories</h4>
   <ul class="category-list">
+    <li><a href='category.php?'>All categories</a></li>
     <?php if (mysqli_num_rows($categories) > 0):?>
       <?php while($cat = mysqli_fetch_assoc($categories)): ?>
-        <li><a href="#"><?php echo $cat['category'] ?></a></li>
+        <li><a href='category.php?<?php echo $cat['category'] ?>=true'><?php echo $cat['category'] ?></a></li>
+        <?php
+        if(isset($_GET['Computer']))
+          $allsells = getAllSellsNapuli($page*9);
+        else if(isset($_GET['Mobili']))
+          $allsells = getAllSellsTorino($page*9);
+        else if(isset($_GET['Edilizia']))
+          $allsells = getAllSellsMilano($page*9);
+        else if(isset($_GET['dfsfs']))
+          $allsells = getAllSellsPalermo($page*9);
+      ?>
       <?php endwhile ?>
     <?php endif ?>
   </ul>
@@ -179,13 +190,26 @@
 <div class="widget category-list">
   <h4 class="widget-header">Areas</h4>
   <ul class="category-list">
+    <li><a href='category.php?'>All locations</a></li>
     <?php if (mysqli_num_rows($locations) > 0):?>
       <?php while ($loc = mysqli_fetch_assoc($locations)): ?>
-        <li><a href="#"><?php echo $loc['location'] ?></a></li>
+        <li><a href='category.php?<?php echo $loc['location'] ?>=true'><?php echo $loc['location'] ?></a></li>
+        <?php
+        if(isset($_GET['Napuli']))
+          $allsells = getAllSellsInArea($page*9, 'Napuli');
+        else if(isset($_GET['Torino']))
+          $allsells = getAllSellsInArea($page*9, 'Torino');
+        else if(isset($_GET['Milano']))
+          $allsells = getAllSellsInArea($page*9, 'Milano');
+        else if(isset($_GET['Palermo']))
+          $allsells = getAllSellsInArea($page*9, 'Palermo');
+      ?>
       <?php endwhile ?>
     <?php endif ?>
   </ul>
 </div>
+
+
 
 <div class="widget filter">
   <h4 class="widget-header">Show Produts</h4>
@@ -283,20 +307,17 @@
                 <?php
                    if(isset($_POST["area"])){
                     $var = $_POST["area"];
-                    if($var == "0"){
-                      $allsells = getAllSells($page*9);
-                    }
-                    else if($var == "1"){
-                      $allsells = getAllSellsNapuli($page*9);
+                    if($var == "1"){
+                      $allsells = getAllSellsInArea($page*9, 'Napuli');
                     }
                     else if($var == "2"){
-                     $allsells = getAllSellsTorino($page*9); 
+                      $allsells = getAllSellsInArea($page*9, 'Torino');
                     }
                     else if($var == "3"){
-                     $allsells = getAllSellsPalermo($page*9); 
+                      $allsells = getAllSellsInArea($page*9, 'Palermo');
                     }
                     else if($var == "4"){
-                     $allsells = getAllSellsMilano($page*9); 
+                      $allsells = getAllSellsInArea($page*9, 'Milano');
                     }
                    }
                 ?>

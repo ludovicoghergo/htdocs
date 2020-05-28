@@ -496,30 +496,9 @@ function getAllSellsByArea($index){
   return $result;
 }
 
-function getAllSellsNapuli($index){
+function getAllSellsInArea($index, $area){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
-  $sql = "SELECT * FROM sell WHERE location = 'Napuli' LIMIT 9 OFFSET $index ";
-  $result = mysqli_query($db, $sql);
-  return $result;
-}
-
-function getAllSellsTorino($index){
-  $db = mysqli_connect('localhost', 'root', '', 'mda');
-  $sql = "SELECT * FROM sell WHERE location = 'Torino' LIMIT 9 OFFSET $index ";
-  $result = mysqli_query($db, $sql);
-  return $result;
-}
-
-function getAllSellsPalermo($index){
-  $db = mysqli_connect('localhost', 'root', '', 'mda');
-  $sql = "SELECT * FROM sell WHERE location = 'Palermo' LIMIT 9 OFFSET $index ";
-  $result = mysqli_query($db, $sql);
-  return $result;
-}
-
-function getAllSellsMilano($index){
-  $db = mysqli_connect('localhost', 'root', '', 'mda');
-  $sql = "SELECT * FROM sell WHERE location = 'Milano' LIMIT 9 OFFSET $index ";
+  $sql = "SELECT * FROM sell WHERE location = '$area' LIMIT 9 OFFSET $index ";
   $result = mysqli_query($db, $sql);
   return $result;
 }
