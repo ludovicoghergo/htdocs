@@ -321,6 +321,9 @@ if(isset($_POST['new_sell'])){
   $desc = mysqli_real_escape_string($db, $_POST['desc']);
   $precio = mysqli_real_escape_string($db, $_POST['precio']);
   $location = mysqli_real_escape_string($db, $_POST['location']);
+  $tmpFile = $_FILES['picture']['tmp_name'];
+  $newFile = $_FILES['picture']['name'];
+  move_uploaded_file($tmpFile, "./images/user/".$newFile);
 
   if (empty($username)){
      alertBox("Please Login",0);
@@ -349,8 +352,8 @@ if(isset($_POST['new_sell'])){
 
 
   $date = date("Y-m-d H:i:s");
-  $query = "INSERT INTO sell (title,category,description, precio, id_user, location, creation_time)
-        VALUES('$title','$category','$desc', '$precio', '$usID','$location','$date')";
+  $query = "INSERT INTO sell (title,category,description, precio, id_user, location, creation_time,picture)
+        VALUES('$title','$category','$desc', '$precio', '$usID','$location','$date','$newFile')";
   $result = mysqli_query($db, $query);
   if($result){
     alertBox("Sell inserted",1);
@@ -546,6 +549,12 @@ if(isset($_POST['send_message'])){
   }else{
       alertBox("Something didn't work out",0);
   }
+}
+function topSellings(){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * from sell ORDER BY views DESC LIMIT 5";
+  $result = mysqli_query($db, $sql);
+  return $result;
 }
 
 function  increaseView($sellid){

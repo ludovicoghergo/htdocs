@@ -164,7 +164,7 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="widget personal-info">
 							<h3 class="widget-header user">Product's Information</h3>
-							<form method="post" action="new_sell.php">
+							<form method="post" action="new_sell.php" enctype="multipart/form-data">
 								<!-- First Name -->
 								<div class="form-group">
 									<label for="first-name">Title</label>
@@ -197,6 +197,10 @@
 									<label for="last-name">Location</label>
 									<input type="text" class="form-control" name="location" id="last-name">
 								</div>
+                <div class="form-group">
+                <label for="new-email">Cover Image</label>
+								<input type="file" name="picture" class="form-control" id="picture">
+                </div>
 								<!--<div class="form-group">
 									<label for="last-name">Produc't photo</label>
 									<input type="file" class="form-control-file mt-2 pt-1" name="photo"   id="input-file">
