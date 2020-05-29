@@ -506,6 +506,13 @@ function getAllSellsInArea($index, $area){
   return $result;
 }
 
+function getAllSellsCategory($index, $cate){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT * FROM sell WHERE category = '$cate' LIMIT 9 OFFSET $index ";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
 
 function getTypeMessage(){
   if (isset($_GET['type'])){

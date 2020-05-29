@@ -158,7 +158,7 @@
 						<div class="container">
 							<div class="row justify-content-center">
 								<div class="col-lg-12 col-md-12 align-content-center">
-										<form>
+										<form action="category.php">
 											<div class="form-row">
 												<div class="form-group col-md-4">
 													<input type="text" class="form-control my-2 my-lg-1" id="inputtext4" placeholder="What are you looking for">
@@ -172,10 +172,12 @@
 													</select>
 												</div>
 												<div class="form-group col-md-3">
-													<input type="text" class="form-control my-2 my-lg-1" id="inputLocation4" placeholder="Location">
+													<input type="text" class="form-control my-2 my-lg-1" name="InputLocation" onchange="this.form.submit()" placeholder="Location">
 												</div>
 												<div class="form-group col-md-2 align-self-center">
+													<a  href="category.php">
 													<button type="submit" class="btn btn-primary">Search Now</button>
+													</a>
 												</div>
 											</div>
 										</form>

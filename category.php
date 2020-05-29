@@ -133,10 +133,22 @@
                 <input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
               </div>
               <div class="form-group col-md-3">
-                <input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
+                <input type="text" class="form-control my-2 my-lg-0" name="inputCategory4" placeholder="Category" onchange="this.form.submit()">
+                <?php
+                   if(isset($_GET["inputCategory4"])){
+                    $categ = $_GET["inputCategory4"];
+                    $allsells = getAllSellsCategory($page*9, $categ);
+                  }
+                  ?>
               </div>
               <div class="form-group col-md-3">
-                <input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
+                <input type="text" class="form-control my-2 my-lg-0" name="inputLocation4" placeholder="Location" onchange="this.form.submit()">
+                  <?php
+                   if(isset($_GET["inputLocation4"])){
+                    $loca = $_GET["inputLocation4"];
+                    $allsells = getAllSellsInArea($page*9, $loca);
+                  }
+                ?>
               </div>
               <div class="form-group col-md-2">
 
@@ -173,15 +185,10 @@
       <?php while($cat = mysqli_fetch_assoc($categories)): ?>
         <li><a href='category.php?<?php echo $cat['category'] ?>=true'><?php echo $cat['category'] ?></a></li>
         <?php
-        if(isset($_GET['Computer']))
-          $allsells = getAllSellsNapuli($page*9);
-        else if(isset($_GET['Mobili']))
-          $allsells = getAllSellsTorino($page*9);
-        else if(isset($_GET['Edilizia']))
-          $allsells = getAllSellsMilano($page*9);
-        else if(isset($_GET['dfsfs']))
-          $allsells = getAllSellsPalermo($page*9);
-      ?>
+        $actual = $cat['category'];
+        if(isset($_GET[$actual]))
+          $allsells = getAllSellsCategory($page*9, $actual);
+        ?>
       <?php endwhile ?>
     <?php endif ?>
   </ul>
@@ -195,14 +202,9 @@
       <?php while ($loc = mysqli_fetch_assoc($locations)): ?>
         <li><a href='category.php?<?php echo $loc['location'] ?>=true'><?php echo $loc['location'] ?></a></li>
         <?php
-        if(isset($_GET['Napuli']))
-          $allsells = getAllSellsInArea($page*9, 'Napuli');
-        else if(isset($_GET['Torino']))
-          $allsells = getAllSellsInArea($page*9, 'Torino');
-        else if(isset($_GET['Milano']))
-          $allsells = getAllSellsInArea($page*9, 'Milano');
-        else if(isset($_GET['Palermo']))
-          $allsells = getAllSellsInArea($page*9, 'Palermo');
+        $yoo = $loc['location'];
+        if(isset($_GET[$yoo]))
+          $allsells = getAllSellsInArea($page*9, $yoo);
       ?>
       <?php endwhile ?>
     <?php endif ?>
@@ -321,7 +323,6 @@
                     }
                    }
                 ?>
-
             </div>
             <div class="col-md-6">
               <div class="view">
