@@ -1,6 +1,7 @@
 <?php
   include('server.php');
-    $trending = topSellings();
+  $cat_trend= getTrendingCategories();
+  $trending = topSellings();
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -135,20 +136,13 @@
 					<div class="short-popular-category-list text-center">
 						<h2>Popular Category</h2>
 						<ul class="list-inline">
+              <?php if (mysqli_num_rows($cat_trend) > 0):?>
+                <?php while($cat = mysqli_fetch_assoc($cat_trend)): ?>
 							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-bed"></i> Hotel</a></li>
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-grav"></i> Fitness</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-car"></i> Cars</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-cutlery"></i> Restaurants</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-coffee"></i> Cafe</a>
-							</li>
+								<a href="category.php?<?php echo $cat['category']?>=true"><?php echo $cat['category']?></a>
+              </li>
+            <?php endwhile?>
+          <?php endif?>
 						</ul>
 					</div>
 
@@ -227,7 +221,7 @@
 		       <div class="thumb-content">
 			          <!-- <div class="price">$200</div> -->
 			             <a href="single.html">
-				                 <img class="card-img-top img-fluid" src="images/products/products-3.jpg" alt="Card image cap">
+				                 <img class="card-img-top img-fluid" src="images/sell/<?php echo $prod['picture'] ?>" alt="Card image cap" style="width:345px;height:200px;">
 			                    </a>
 		                      </div>
 		                        <div class="card-body">

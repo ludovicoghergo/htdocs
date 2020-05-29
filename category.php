@@ -180,7 +180,6 @@
           <div class="widget category-list">
   <h4 class="widget-header">Top Categories</h4>
   <ul class="category-list">
-    <li><a href='category.php?'>All categories</a></li>
     <?php if (mysqli_num_rows($categories) > 0):?>
       <?php while($cat = mysqli_fetch_assoc($categories)): ?>
         <li><a href='category.php?<?php echo $cat['category'] ?>=true'><?php echo $cat['category'] ?></a></li>
@@ -197,7 +196,6 @@
 <div class="widget category-list">
   <h4 class="widget-header">Areas</h4>
   <ul class="category-list">
-    <li><a href='category.php?'>All locations</a></li>
     <?php if (mysqli_num_rows($locations) > 0):?>
       <?php while ($loc = mysqli_fetch_assoc($locations)): ?>
         <li><a href='category.php?<?php echo $loc['location'] ?>=true'><?php echo $loc['location'] ?></a></li>
@@ -269,7 +267,7 @@
           <div class="row">
             <div class="col-md-6">
               <form method=post>
-                   Filters 
+                   Filters
                   <select name="order" onchange="this.form.submit()">
                   <option value="" disabled selected>Choose a filter</option>
                   <option value="1">Most Recent</option>
@@ -288,16 +286,16 @@
                       $allsells = getAllSellsSorted($page*9);
                     }
                     else if($var == "3"){
-                     $allsells = getAllSellsSortedDesc($page*9); 
+                     $allsells = getAllSellsSortedDesc($page*9);
                     }
                     else if($var == "4"){
-                     $allsells = getAllSellsByArea($page*9); 
+                     $allsells = getAllSellsByArea($page*9);
                     }
                    }
                 ?>
 
                 <form method=post>
-                   Select area 
+                   Select area
                   <select name="area" onchange="this.form.submit()">
                   <option value="0">Areas</option>
                   <option value="1">Napuli</option>
@@ -326,15 +324,6 @@
             </div>
             <div class="col-md-6">
               <div class="view">
-                <strong>Views</strong>
-                <ul class="list-inline view-switcher">
-                  <li class="list-inline-item">
-                    <a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
@@ -349,7 +338,7 @@
                     <div class="card">
                       <div class="thumb-content">
                         <a href="product.php?sells_id=<?php echo $sell['ID']  ?>">
-                          <img class="card-img-top img-fluid" src="images/products/products-2.jpg" alt="Card image cap">
+                          <img class="card-img-top img-fluid" src="images/sell/<?php echo $sell['picture']  ?>" alt="Card image cap" style="width:240px;height:180px;">
                         </a>
                       </div>
                       <div class="card-body">

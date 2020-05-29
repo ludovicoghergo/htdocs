@@ -323,7 +323,7 @@ if(isset($_POST['new_sell'])){
   $location = mysqli_real_escape_string($db, $_POST['location']);
   $tmpFile = $_FILES['picture']['tmp_name'];
   $newFile = $_FILES['picture']['name'];
-  move_uploaded_file($tmpFile, "./images/user/".$newFile);
+  move_uploaded_file($tmpFile, "./images/sell/".$newFile);
 
   if (empty($username)){
      alertBox("Please Login",0);
@@ -557,9 +557,17 @@ if(isset($_POST['send_message'])){
       alertBox("Something didn't work out",0);
   }
 }
+
 function topSellings(){
   $db = mysqli_connect('localhost', 'root', '', 'mda');
   $sql = "SELECT * from sell ORDER BY views DESC LIMIT 5";
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
+function getTrendingCategories(){
+  $db = mysqli_connect('localhost', 'root', '', 'mda');
+  $sql = "SELECT DISTINCT category FROM `sell` order by views LIMIT 3";
   $result = mysqli_query($db, $sql);
   return $result;
 }
