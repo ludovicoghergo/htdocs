@@ -220,15 +220,15 @@
 	     <div class="card">
 		       <div class="thumb-content">
 			          <!-- <div class="price">$200</div> -->
-			             <a href="single.html">
+			             <a href="product.php?sells_id=<?php echo $prod['ID'] ?>">
 				                 <img class="card-img-top img-fluid" src="images/sell/<?php echo $prod['picture'] ?>" alt="Card image cap" style="width:345px;height:200px;">
 			                    </a>
 		                      </div>
 		                        <div class="card-body">
-		                            <h4 class="card-title"><a href="single.html"><?php echo ucfirst($prod['title']) ?></a></h4>
+		                            <h4 class="card-title"><a href="product.php?sells_id=<?php echo $prod['ID'] ?>"><?php echo ucfirst($prod['title']) ?></a></h4>
 		                              <ul class="list-inline product-meta">
 		    	                             <li class="list-inline-item">
-		    		                                 <a href="single.html"><i class="fa fa-folder-open-o"></i><?php echo ucfirst($prod['category']) ?></a>
+		    		                                 <a href="product.php?sells_id=<?php echo $prod['ID'] ?>"><i class="fa fa-folder-open-o"></i><?php echo ucfirst($prod['category']) ?></a>
 		    	                                    </li>
 		    	                                       <li class="list-inline-item">
 		    		                                           <a href="#"><i class="fa fa-calendar"></i><?php echo ucfirst($prod['creation_time']) ?></a>
