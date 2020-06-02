@@ -71,38 +71,6 @@
                     <a class="nav-link dropdown-toggle"  href="category.php">Catalog<span></span>
   								  </a>
   							</li>
-  							<li class="nav-item dropdown dropdown-slide">
-                  <del>
-                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  									Pages <span><i class="fa fa-angle-down"></i></span>
-  								</a>
-                  </del>
-  								<!-- Dropdown list -->
-  								<div class="dropdown-menu">
-  									<a class="dropdown-item" href="about-us.html">About Us</a>
-  									<a class="dropdown-item" href="contact-us.html">Contact Us</a>
-  									<a class="dropdown-item" href="user-profile.html">User Profile</a>
-  									<a class="dropdown-item" href="404.html">404 Page</a>
-  									<a class="dropdown-item" href="package.html">Package</a>
-  									<a class="dropdown-item" href="single.html">Single Page</a>
-  									<a class="dropdown-item" href="store.html">Store Single</a>
-  									<a class="dropdown-item" href="single-blog.html">Single Post</a>
-  									<a class="dropdown-item" href="blog.html">Blog</a>
-
-  								</div>
-  							</li>
-  							<li class="nav-item dropdown dropdown-slide">
-                  <del>
-                  <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  									Listing <span><i class="fa fa-angle-down"></i></span>
-  								</a>
-                  </del>
-  								<!-- Dropdown list -->
-  								<div class="dropdown-menu">
-  									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
-  									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
-  								</div>
-  							</li>
   						</ul>
   						<ul class="navbar-nav ml-auto mt-10">
                 <?php  if (isset($_SESSION['username'])) : ?>
@@ -173,20 +141,8 @@
 
 					<!-- product slider -->
 					<div class="product-slider">
-						<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
-							<img class="img-fluid w-100" src="images/products/products-1.jpg" alt="product-img">
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Second slide">
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-3.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-3.jpg" alt="Third slide">
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-1.jpg" alt="Third slide">
-						</div>
-						<div class="product-slider-item my-4" data-image="images/products/products-2.jpg">
-							<img class="d-block img-fluid w-100" src="images/products/products-2.jpg" alt="Third slide">
+						<div class="product-slider-item my-4" data-image="images/sell/<?php echo $product['picture']?>">
+							<img class="img-fluid w-100" src="images/sell/<?php echo $product['picture']?>" alt="product-img">
 						</div>
 					</div>
 					<!-- product slider -->
@@ -200,10 +156,6 @@
 							<li class="nav-item">
 								<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
 								 aria-selected="false">Specifications</a>
-							</li>
-							<li class="nav-item">
-								<del><a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
-								 aria-selected="false">Reviews</a></del>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContent">
@@ -242,72 +194,6 @@
 										</tr>
 									</tbody>
 								</table>
-							</div>
-						<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-								<h3 class="tab-title">Product Review</h3>
-								<div class="product-review">
-									<div class="media">
-										<!-- Avater -->
-										<img src="images/user/user-thumb.jpg" alt="avater">
-										<div class="media-body">
-											<!-- Ratings -->
-											<div class="ratings">
-												<ul class="list-inline">
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-													<li class="list-inline-item">
-														<i class="fa fa-star"></i>
-													</li>
-												</ul>
-											</div>
-											<div class="name">
-												<h5>Jessica Brown</h5>
-											</div>
-											<div class="date">
-												<p>Mar 20, 2018</p>
-											</div>
-											<div class="review-comment">
-												<p>
-													Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe laudant tota rem ape
-													riamipsa eaque.
-												</p>
-											</div>
-										</div>
-									</div>
-									<div class="review-submission">
-										<h3 class="tab-title">Submit your review</h3>
-										<!-- Rate -->
-										<div class="rate">
-											<div class="starrr"></div>
-										</div>
-										<div class="review-submit">
-											<form action="#" class="row">
-												<div class="col-lg-6">
-													<input type="text" name="name" id="name" class="form-control" placeholder="Name">
-												</div>
-												<div class="col-lg-6">
-													<input type="email" name="email" id="email" class="form-control" placeholder="Email">
-												</div>
-												<div class="col-12">
-													<textarea name="review" id="review" rows="10" class="form-control" placeholder="Message"></textarea>
-												</div>
-												<div class="col-12">
-													<button type="submit" class="btn btn-main">Sumbit</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
